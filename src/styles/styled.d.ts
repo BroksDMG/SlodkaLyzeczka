@@ -2,10 +2,11 @@ import 'styled-components';
 
 interface Theme {
   colors: {
-    primary: string;
+    gold: string;
     secondary: string;
     background: string;
     text: string;
+    textGold:string
   };
   spacing: {
     small: string;
@@ -13,6 +14,15 @@ interface Theme {
     large: string;
     xlarge: string;
   };
+  textSize:{
+    mini:string,
+    small:string,
+    medium:string,
+    large:string,
+},
+  fonts:{
+    CrimsonText:string
+  }
 }
 
 declare module 'styled-components' {

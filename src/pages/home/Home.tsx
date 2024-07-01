@@ -1,4 +1,4 @@
-import RootLayout from '../layout';
+import RootLayout from '../../app/layout';
 
 const Home: React.FC = () => (
   <RootLayout>

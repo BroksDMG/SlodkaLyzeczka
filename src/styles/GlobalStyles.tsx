@@ -8,9 +8,9 @@ const GlobalStyles=createGlobalStyle`
   }
 
   body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    font-family: ${(props)=>props.theme.fonts.CrimsonText};
+    background-color: ${(props)=>props.theme.colors.background};
+    color: ${(props)=>props.theme.colors.text};
     line-height: 1.6;
   }
 
