@@ -5,6 +5,9 @@ const FooterContainer = styled.footer`
   padding: ${(props) => props.theme.spacing.medium};
   color: white;
   text-align: center;
+  align-self:flex-end;
+  width:100%;
+  margin-top: auto;
 `;
 
 const Footer: React.FC = () => (
