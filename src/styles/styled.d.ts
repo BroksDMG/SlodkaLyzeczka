@@ -7,6 +7,7 @@ interface Theme {
     background: string;
     text: string;
     textGold:string
+    textWhite:string
   };
   spacing: {
     small: string;
@@ -19,6 +20,7 @@ interface Theme {
     small:string,
     medium:string,
     large:string,
+    xlarge: string;
 },
   fonts:{
     CrimsonText:string
