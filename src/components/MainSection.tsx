@@ -5,7 +5,7 @@ import Button from './Button';
 import { BiSolidLeftArrow,BiSolidRightArrow } from "react-icons/bi";
 import StageCard from './StageCard';
 import theme from '@/styles/theme';
-const MainContainer = styled.main`
+const MainContainer = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;

@@ -8,6 +8,10 @@ interface Theme {
     text: string;
     textGold:string
     textWhite:string
+    beige:string
+    lightBeige:string
+    goldIntense:string
+    pink:string
   };
   spacing: {
     small: string;
@@ -21,6 +25,7 @@ interface Theme {
     medium:string,
     large:string,
     xlarge: string;
+    xxlarge:string;
 },
   fonts:{
     CrimsonText:string

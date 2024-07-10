@@ -6,7 +6,11 @@ const theme = {
       background: '#F8F7F2',
       textGold:'#AB9766',
       text: '#000000',
-      textWhite:'#F8F7F2'
+      textWhite:'#F8F7F2',
+      beige:'#F0D6AB',
+      lightBeige:'#E9DFCF',
+      goldIntense:'#DAA520',
+      pink:'#FFDAF1'
     },
     spacing: {
       small: '8px',
@@ -20,6 +24,7 @@ const theme = {
         medium:'14px',
         large:'18px',
         xlarge: '25px',
+        xxlarge:'35px',
     },
     fonts:{
         CrimsonText:"'Crimson Text', serif",
