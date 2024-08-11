@@ -8,6 +8,8 @@ import Footer from '../components/Footer';
 import MainSection from '@/components/MainSection';
 import styled from 'styled-components';
 import CategorySection from '@/components/CategorySection';
+import QuestionsSection from '@/components/QuestionsSection';
+import QualitySection from '@/components/QualitySection';
 const Body = styled.body`
   display: flex;
   min-height: 100vh;
@@ -22,7 +24,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <GlobalStyle />
           <MainSection/>
           <Header />
+          <QualitySection/>
           <CategorySection/>
+          <QuestionsSection/>
           <Footer />
         </ThemeProvider>
       </Body>

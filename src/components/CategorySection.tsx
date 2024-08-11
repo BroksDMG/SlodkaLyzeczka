@@ -7,7 +7,7 @@ const CategorySectionContainer=styled.section`
     position:relative;
     overflow:hidden;
     display: flex;
-    /* white-space: nowrap; Prevent line breaks; */
+    align-items:center;
     overflow-x: auto; /* Allow horizontal scrolling */
 `
 const CategorySection:React.FC=()=>{
