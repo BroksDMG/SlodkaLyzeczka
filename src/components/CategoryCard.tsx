@@ -23,6 +23,7 @@ const CategoryCardImageContainer=styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    cursor: pointer;
 `
 
 const CatergoryCardImage=styled(Image)`
