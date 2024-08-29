@@ -10,12 +10,15 @@ const CategorySectionContainer=styled.section`
     align-items:center;
     overflow-x: auto; /* Allow horizontal scrolling */
 `
+interface CategorySectionInterface{
+    setOnClickCategoryHandler:(id:string)=>void;
+}
 
-const CategorySection:React.FC=()=>{
+const CategorySection:React.FC<CategorySectionInterface>=({setOnClickCategoryHandler})=>{
     
     return(
         <CategorySectionContainer>
-            {qualityData.map((data,i)=><CategoryCard image={data.image} key={data.image+i} description={data.description} title={data.title} color={data.color}/>)}
+            {qualityData.map((data,i)=><CategoryCard setOnClickCategoryHandler={setOnClickCategoryHandler} id={data.id} image={data.image} key={data.image+i} description={data.description} title={data.title} color={data.color}/>)}
         </CategorySectionContainer>
     )
 }
@@ -43,7 +46,8 @@ export default CategorySection
 
 
 const qualityData=[
-    {
+    {   
+        id:'BirthdayCakes',
         color:theme.colors.goldIntense,
         image:'/images/tortyUrodzinoweCategorySectionImage.png',
         title:'Torty Urodzinowe',
@@ -51,6 +55,7 @@ const qualityData=[
 
     },
     {
+        id:'WeedingCakes',
         color:theme.colors.lightBeige,
         image:'/images/tortySlubneCategorySectionImage.png',
         title:'Torty Ślubne',
@@ -59,6 +64,7 @@ const qualityData=[
     }
     ,
     {
+        id:'OccasionalSweets',
         color:theme.colors.beige,
         image:'/images/slodkosciOkazjonalneCategorySectionImage.png',
         title:'Słodkości Okazjonalne',
@@ -66,6 +72,7 @@ const qualityData=[
 
     },
     {
+        id:'CupCakes',
         color:theme.colors.pink,
         image:'/images/slodkosciOkazjonalneCategorySectionImage.png',
         title:'Babeczki',
@@ -73,6 +80,7 @@ const qualityData=[
 
     },
     {
+        id:'SeetTables',
         color:theme.colors.beige,
         image:'/images/SlodkiStolCategorySectionImage.png',
         title:'Słodkie Stoły',

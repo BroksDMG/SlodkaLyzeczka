@@ -3,10 +3,12 @@ import Image from "next/image";
 import React from "react";
 
 interface CategoryCardProps{
+ id:string,
  title:string,
  image:string,
  description:string,
  color:string,
+ setOnClickCategoryHandler:(id:string)=>void;
 }
 
 const CategoryCardContainer=styled.article`
@@ -65,8 +67,8 @@ const DescriptonsCategoryCard=styled.p`
     position:relative;
     font-size:${props=>props.theme.textSize.medium};
 `
-const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image})=>(
-    <CategoryCardContainer  >
+const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image,setOnClickCategoryHandler,id})=>(
+    <CategoryCardContainer onClick={()=>setOnClickCategoryHandler(id)} >
        <CategoryCardImageContainer>
             <CategoryCardBorder color={color}/>
             <TitleCategoryCard color={color}>{title}</TitleCategoryCard>
