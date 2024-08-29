@@ -16,7 +16,7 @@ const Home: NextPage = () => {
           <MainSection/>
           <QualitySection/>
           <CategorySection setOnClickCategoryHandler={setCategoryOnClickHandler}/>
-          <CategorySite onClickCategoryHandler={categoryCardOnClickHandler}/>
+          <CategorySite onClickCategoryHandler={categoryCardOnClickHandler} setOnClickCategoryHandler={setCategoryOnClickHandler}/>
           <QuestionsSection/>
           <LocationSection/>
     </>

@@ -32,7 +32,6 @@ const Answer=styled.div<{show:boolean}>`
 `
 const QuestionCard:React.FC<QestionCardProps>=({answer,question})=>{
    const [showAnswer,setShowAnswer]=useState(false);
-   console.log(showAnswer)
     return(
         <QuestionCardContainer>
          <Question onClick={()=>setShowAnswer((e)=>!e)}>
