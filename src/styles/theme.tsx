@@ -10,7 +10,10 @@ const theme = {
       beige:'#F0D6AB',
       lightBeige:'#E9DFCF',
       goldIntense:'#DAA520',
-      pink:'#FFDAF1'
+      pink:'#FFDAF1',
+      gray:'#D9D9D9',
+      blackShadow:'#00000030',
+      textBlackShadow:'#00000040'
     },
     spacing: {
       small: '8px',

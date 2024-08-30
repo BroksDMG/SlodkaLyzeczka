@@ -32,29 +32,36 @@ const CategorySiteContainer=styled.section<CatergorySiteInterface>`
     margin-left:30px;
     border-top-left-radius: 20px;
     overflow-y:auto;
-    visibility:${props=>(props.onClickCategoryHandler?.length<=0?'hidden':'visible')};
+    visibility:hidden;
+    background-color:${props=>props.theme.colors.gray};
+    
     @keyframes fadeIn {
     from {
+        visibility:hidden;
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateX(540px);
     }
     to {
+        visibility:visible;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     }
 
     @keyframes fadeOut {
         from {
+            visibility:visible;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
         to {
+            visibility:hidden;
+            transform: translateX(540px);
             opacity: 0;
-            transform: translateY(-20px);
         }
     }
     animation: ${props=>(props.onClickCategoryHandler?.length<=0? 'fadeOut' : 'fadeIn')} 0.5s ease-in-out forwards;
+
 `
 const ExitButton=styled.button`
     width:50px;
@@ -91,7 +98,6 @@ const ExitButton=styled.button`
     /* box-shadow:inset 20px 20px 20px rgba(0,0,0,0,0.05),25px 35px 20px rgba(0,0,0,0,0.05), 25px 30px 30px rgba(0,0,0,0,0.05), inset -20px -20px 25px rgba(255,255,255,0.9); */
 `
 const CategorySiteHeaderSection=styled.div`
-    background-color:green;
     height:60vh;
     min-height:35vh;
     width:100%;
@@ -103,7 +109,6 @@ const CategorySiteHeaderSection=styled.div`
     padding: 0 20px 0 20px;
 `
 const CategorySiteContentSection=styled.div`
-    background-color:blue;
     width:100%;
     height:100%;
     display:flex;
@@ -120,23 +125,26 @@ const CategorySiteContentSectionProductCardContainer=styled.div`
     width:200px;
 `
 const ProductCardImage=styled(Image)`
+    border-top-left-radius:3%;
+    border-top-right-radius:3%;
     object-fit:cover; 
     z-index:20;
     width:200px;
     height:auto;
     aspect-ratio:8/7;
+    box-shadow: 2px 5px 15px 2px ${props=>props.theme.colors.blackShadow};
 `
-const ProductCardTitle=styled.h3`
-    
+const ProductCardTitle=styled.h3` 
+    text-shadow: 2px 3px 6px ${props => props.theme.colors.textBlackShadow};
 `
 const ProductCardDesc=styled.span`
-    
+     text-shadow: 2px 4px 4px ${props => props.theme.colors.textBlackShadow};
 `
 const CategorySiteTitleSection =styled.h1`
     
 `
 const CategorySiteDescSection =styled.span`
-    
+   
 `
 const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
     const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];

@@ -12,6 +12,9 @@ interface Theme {
     lightBeige:string
     goldIntense:string
     pink:string
+    gray:string
+    blackShadow:string
+    textBlackShadow:string
   };
   spacing: {
     small: string;
