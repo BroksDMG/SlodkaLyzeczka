@@ -123,6 +123,11 @@ const CategorySiteContentSectionProductCardContainer=styled.div`
     justify-content:center;
     cursor: pointer;
     width:200px;
+    &:hover{
+    transform:scale(1.02);
+    transition-property: transform;
+    transition-duration: 0.3s, 0.5s;
+    }
 `
 const ProductCardImage=styled(Image)`
     border-top-left-radius:3%;
