@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import { BiSolidLeftArrow,BiSolidRightArrow } from "react-icons/bi";
 import Image from "next/image";
+import { useState } from "react";
 interface CatergorySiteInterface{
     onClickCategoryHandler:string;
-    setOnClickCategoryHandler?:(id:string)=>void
+    setOnClickCategoryHandler?:(id:string)=>void;
+    productDetailData?:object;
 }
 interface Product {
     img: string;
@@ -21,7 +23,7 @@ interface ProductDataInterface {
 }
 
 const CategorySiteContainer=styled.section<CatergorySiteInterface>`
-    width:100%;
+    width:95%;
     height:100vh;
     position:fixed;
     display: flex;
@@ -29,7 +31,7 @@ const CategorySiteContainer=styled.section<CatergorySiteInterface>`
     align-items:center;
     background-color:black;
     z-index:10;
-    margin-left:30px;
+    margin-left:5%;
     border-top-left-radius: 20px;
     overflow-y:auto;
     visibility:hidden;
@@ -151,9 +153,54 @@ const CategorySiteTitleSection =styled.h1`
 const CategorySiteDescSection =styled.span`
    
 `
+
+const ProductDetailContainer=styled.div<CatergorySiteInterface>`
+    width:100%;
+    height:100vh;
+    position:fixed;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:black;
+    z-index:20;
+    border-top-left-radius: 20px;
+    overflow-y:auto;
+    visibility:hidden;
+    background-color:${props=>props.theme.colors.gray};
+    
+    @keyframes In {
+    from {
+        visibility:hidden;
+        opacity: 0;
+        transform: translateX(540px);
+    }
+    to {
+        visibility:visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+
+    @keyframes Out {
+        from {
+            visibility:visible;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            visibility:hidden;
+            transform: translateX(540px);
+            opacity: 0;
+        }
+    }
+    animation: ${props => (props.productDetailData ? 'In' : 'Out')} 0.5s ease-in-out forwards;
+`
 const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
     const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];
     console.log( onClickCategoryHandler.length)
+    const [productDetailData,setProductDetailData]=useState(null);
+    console.log(productDetailData?"true":"false")
+
     return(
         <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
             {setOnClickCategoryHandler && (
@@ -167,13 +214,21 @@ const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,se
             </CategorySiteHeaderSection>
             <CategorySiteContentSection>
                 {products.map((data,i)=>(
-                    <CategorySiteContentSectionProductCardContainer key={i+data.title}>
+                    <CategorySiteContentSectionProductCardContainer key={i+data.title} onClick={()=>setProductDetailData(data)}>
                         <ProductCardImage src={data.img} width={150} height={150} alt="productimage" />
                         <ProductCardTitle>{data.title}</ProductCardTitle>
                         <ProductCardDesc>{data.desc.length>50?data.desc.slice(0,50)+'...':data.desc}</ProductCardDesc>
                     </CategorySiteContentSectionProductCardContainer>
                 ))}
             </CategorySiteContentSection>
+            <ProductDetailContainer productDetailData={productDetailData} >
+                    <ExitButton onClick={() => setProductDetailData(null)}>
+                        <BiSolidRightArrow />
+                    </ExitButton>
+                
+           <ProductCardImage src={'/images/logo.png'} width={150} height={150} alt="productimage" />
+
+</ProductDetailContainer>
         </CategorySiteContainer>
     )
 } 
