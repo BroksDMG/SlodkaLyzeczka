@@ -269,11 +269,68 @@ const ProductsData:ProductDataInterface={
             desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
         }
     ],
-    BirthdayCakes:[{
+    BirthdayCakes:[
+        {
         img:'/images/products/weedingCakes/image 2.png',
         title:'Biała Róża',
         desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-    },],
+    },
+        {
+        img:'/images/products/birhdayCakes/438785376_18432739567025106_8958186019059700531_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/449771117_18445963351025106_4722096168469771803_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/451705491_18448894129025106_1319351217688146439_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },//
+        {
+        img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/457870078_18457483537025106_3007933157330030962_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/458712063_18458444308025106_5156054030466713806_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/460017699_18460268683025106_6907721994053293721_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/461031148_18461603164025106_5223958142573169967_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+        {
+        img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
+        title:'Biała Róża',
+        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+],
     OccasionalSweets:[{
         img:'/images/products/weedingCakes/image 2.png',
         title:'Biała Róża',
