@@ -74,9 +74,10 @@ const ExitButton=styled.button`
     align-items:center;
     font-size:${(props)=>props.theme.textSize.xlarge};
     color:${(props)=>props.theme.colors.gold};
-    position:absolute;
+    position:fixed;
     top:20px;
-    left:-20px;
+    left:0px;
+    z-index:10;
     padding-left:4px;
     border: none;
     cursor: pointer;
@@ -100,15 +101,15 @@ const ExitButton=styled.button`
     /* box-shadow:inset 20px 20px 20px rgba(0,0,0,0,0.05),25px 35px 20px rgba(0,0,0,0,0.05), 25px 30px 30px rgba(0,0,0,0,0.05), inset -20px -20px 25px rgba(255,255,255,0.9); */
 `
 const CategorySiteHeaderSection=styled.div`
-    height:60vh;
-    min-height:35vh;
+    height:100%;
     width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     text-align:center;
-    padding: 0 20px 0 20px;
+    position:relative;
+    padding-top: 20px;
 `
 const CategorySiteContentSection=styled.div`
     width:100%;
@@ -124,7 +125,6 @@ const CategorySiteContentSectionProductCardContainer=styled.div`
     flex-direction:column;
     justify-content:center;
     cursor: pointer;
-    width:200px;
     &:hover{
     transform:scale(1.02);
     transition-property: transform;
@@ -136,10 +136,17 @@ const ProductCardImage=styled(Image)`
     border-top-right-radius:3%;
     object-fit:cover; 
     z-index:20;
-    width:200px;
+    width:300px;
     height:auto;
     aspect-ratio:8/7;
     box-shadow: 2px 5px 15px 2px ${props=>props.theme.colors.blackShadow};
+`
+const MainBirhdayCakeImage = styled(Image)`
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+    object-position: center 57%;
+    aspect-ratio: 10 / 3;
 `
 const ProductCardTitle=styled.h3` 
     text-shadow: 2px 3px 6px ${props => props.theme.colors.textBlackShadow};
@@ -147,59 +154,71 @@ const ProductCardTitle=styled.h3`
 const ProductCardDesc=styled.span`
      text-shadow: 2px 4px 4px ${props => props.theme.colors.textBlackShadow};
 `
-const CategorySiteTitleSection =styled.h1`
-    
+const CategorySiteTitleSection =styled.div`
+    position: absolute;
+    width:100%;
+  background-color: rgba(255, 255, 255, 0.7);  /* Białe półprzezroczyste tło (70% przezroczystości) */
+  color: ${props=>props.theme.colors.goldIntense}; 
+  font-size: 34px;  
+  font-weight: bold; 
+  text-align: center; 
 `
 const CategorySiteDescSection =styled.span`
    
 `
 
-const ProductDetailContainer=styled.div<CatergorySiteInterface>`
-    width:100%;
-    height:100vh;
-    position:fixed;
-    display: flex;
-    flex-direction:column;
-    align-items:center;
-    background-color:black;
-    z-index:20;
-    border-top-left-radius: 20px;
-    overflow-y:auto;
-    visibility:hidden;
-    background-color:${props=>props.theme.colors.gray};
+// const ProductDetailContainer=styled.div<CatergorySiteInterface>`
+//     width:100%;
+//     height:100vh;
+//     position:fixed;
+//     display: flex;
+//     flex-direction:column;
+//     align-items:center;
+//     background-color:black;
+//     z-index:20;
+//     border-top-left-radius: 20px;
+//     overflow-y:auto;
+//     visibility:hidden;
+//     background-color:${props=>props.theme.colors.gray};
     
-    @keyframes In {
-    from {
-        visibility:hidden;
-        opacity: 0;
-        transform: translateX(540px);
-    }
-    to {
-        visibility:visible;
-        opacity: 1;
-        transform: translateX(0);
-    }
-    }
+//     @keyframes In {
+//     from {
+//         visibility:hidden;
+//         opacity: 0;
+//         transform: translateX(540px);
+//     }
+//     to {
+//         visibility:visible;
+//         opacity: 1;
+//         transform: translateX(0);
+//     }
+//     }
 
-    @keyframes Out {
-        from {
-            visibility:visible;
-            opacity: 1;
-            transform: translateX(0);
-        }
-        to {
-            visibility:hidden;
-            transform: translateX(540px);
-            opacity: 0;
-        }
-    }
-    animation: ${props => (props.productDetailData ? 'In' : 'Out')} 0.5s ease-in-out forwards;
+//     @keyframes Out {
+//         from {
+//             visibility:visible;
+//             opacity: 1;
+//             transform: translateX(0);
+//         }
+//         to {
+//             visibility:hidden;
+//             transform: translateX(540px);
+//             opacity: 0;
+//         }
+//     }
+//     animation: ${props => (props.productDetailData ? 'In' : 'Out')} 0.5s ease-in-out forwards;
+// `
+const MainImageCoitainer=styled.div`
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width:100%;
 `
 const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
     const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];
-    console.log( onClickCategoryHandler.length)
-    const [productDetailData,setProductDetailData]=useState(null);
-    console.log(productDetailData?"true":"false")
+    // const [productDetailData,setProductDetailData]=useState(null)    ;
 
     return(
         <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
@@ -209,26 +228,29 @@ const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,se
                 </ExitButton>
             )}
             <CategorySiteHeaderSection>
-            <CategorySiteTitleSection>Wedding Cakes</CategorySiteTitleSection>
-            <CategorySiteDescSection>uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów</CategorySiteDescSection>
+            <MainImageCoitainer>
+            <CategorySiteTitleSection>Torty Ślubne</CategorySiteTitleSection>
+            <MainBirhdayCakeImage src={'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
+            </MainImageCoitainer>
+            <CategorySiteDescSection>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! Oferujemy szeroki wybór wzorów i smaków, które uczynią każdą uroczystość niezapomnianą. Przejrzyj nasze przykładowe realizacje, a jeśli masz swój własny pomysł, chętnie zrealizujemy Twoje marzenie. Napisz do nas, a wspólnie stworzymy tort idealnie dopasowany do Twoich potrzeb!</CategorySiteDescSection>
             </CategorySiteHeaderSection>
             <CategorySiteContentSection>
                 {products.map((data,i)=>(
                     <CategorySiteContentSectionProductCardContainer key={i+data.title} onClick={()=>setProductDetailData(data)}>
                         <ProductCardImage src={data.img} width={150} height={150} alt="productimage" />
-                        <ProductCardTitle>{data.title}</ProductCardTitle>
-                        <ProductCardDesc>{data.desc.length>50?data.desc.slice(0,50)+'...':data.desc}</ProductCardDesc>
+                        {/* <ProductCardTitle>{data.title}</ProductCardTitle>
+                        <ProductCardDesc>{data.desc.length>50?data.desc.slice(0,50)+'...':data.desc}</ProductCardDesc> */}
                     </CategorySiteContentSectionProductCardContainer>
                 ))}
             </CategorySiteContentSection>
-            <ProductDetailContainer productDetailData={productDetailData} >
+            {/* <ProductDetailContainer productDetailData={productDetailData} >
                     <ExitButton onClick={() => setProductDetailData(null)}>
                         <BiSolidRightArrow />
                     </ExitButton>
                 
            <ProductCardImage src={'/images/logo.png'} width={150} height={150} alt="productimage" />
 
-</ProductDetailContainer>
+</ProductDetailContainer> */}
         </CategorySiteContainer>
     )
 } 
@@ -270,11 +292,6 @@ const ProductsData:ProductDataInterface={
         }
     ],
     BirthdayCakes:[
-        {
-        img:'/images/products/weedingCakes/image 2.png',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-    },
         {
         img:'/images/products/birhdayCakes/438785376_18432739567025106_8958186019059700531_n.jpg',
         title:'Biała Róża',
