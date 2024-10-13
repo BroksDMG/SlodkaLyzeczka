@@ -1,7 +1,9 @@
 import styled from "styled-components"
-import { BiSolidLeftArrow,BiSolidRightArrow } from "react-icons/bi";
+import { BiSolidRightArrow } from "react-icons/bi";
 import Image from "next/image";
-import { useState } from "react";
+import { FaLocationArrow } from "react-icons/fa6";
+
+import React from "react";
 interface CatergorySiteInterface{
     onClickCategoryHandler:string;
     setOnClickCategoryHandler?:(id:string)=>void;
@@ -107,7 +109,6 @@ const CategorySiteHeaderSection=styled.div`
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    text-align:center;
     position:relative;
     padding-top: 20px;
 `
@@ -163,51 +164,7 @@ const CategorySiteTitleSection =styled.div`
   font-weight: bold; 
   text-align: center; 
 `
-const CategorySiteDescSection =styled.span`
-   
-`
 
-// const ProductDetailContainer=styled.div<CatergorySiteInterface>`
-//     width:100%;
-//     height:100vh;
-//     position:fixed;
-//     display: flex;
-//     flex-direction:column;
-//     align-items:center;
-//     background-color:black;
-//     z-index:20;
-//     border-top-left-radius: 20px;
-//     overflow-y:auto;
-//     visibility:hidden;
-//     background-color:${props=>props.theme.colors.gray};
-    
-//     @keyframes In {
-//     from {
-//         visibility:hidden;
-//         opacity: 0;
-//         transform: translateX(540px);
-//     }
-//     to {
-//         visibility:visible;
-//         opacity: 1;
-//         transform: translateX(0);
-//     }
-//     }
-
-//     @keyframes Out {
-//         from {
-//             visibility:visible;
-//             opacity: 1;
-//             transform: translateX(0);
-//         }
-//         to {
-//             visibility:hidden;
-//             transform: translateX(540px);
-//             opacity: 0;
-//         }
-//     }
-//     animation: ${props => (props.productDetailData ? 'In' : 'Out')} 0.5s ease-in-out forwards;
-// `
 const MainImageCoitainer=styled.div`
         display: flex;
     flex-direction: column;
@@ -216,151 +173,193 @@ const MainImageCoitainer=styled.div`
     position: relative;
     width:100%;
 `
+const CategorySiteDescSection =styled.span`
+   background-color: #f0f0f0;  /* Delikatne tło, aby wyróżnić tekst */
+   width:100%;
+  padding: 40px 30px;  /* Duże wewnętrzne odstępy dla przestrzeni */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* Subtelny cień dla efektu unoszenia */
+  span{
+    font-weight:bold;
+    margin-bottom:10px;
+    display:block
+  }
+  p{
+    margin-top:30px
+  }
+  //button
+  div{
+    margin-top:20px;
+    width:80%;
+    display:flex;
+    justify-content:center;
+  }
+  a{
+    display: inline-flex;
+    width:max-content;
+        align-items: center;
+        background-color:${props=>props.theme.colors.goldIntense};
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+  }
+  
+`
+const InstagramIcon = styled(FaLocationArrow )`
+  margin-left: 10px;   
+  font-size: 24px;      
+  transform: translateY(2px);
+`;
 const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
-    const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];
-    // const [productDetailData,setProductDetailData]=useState(null)    ;
+  const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];
 
-    return(
-        <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
-            {setOnClickCategoryHandler && (
-                <ExitButton onClick={() => setOnClickCategoryHandler('')}>
-                    <BiSolidRightArrow />
-                </ExitButton>
-            )}
-            <CategorySiteHeaderSection>
-            <MainImageCoitainer>
-            <CategorySiteTitleSection>Torty Ślubne</CategorySiteTitleSection>
-            <MainBirhdayCakeImage src={'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
-            </MainImageCoitainer>
-            <CategorySiteDescSection>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! Oferujemy szeroki wybór wzorów i smaków, które uczynią każdą uroczystość niezapomnianą. Przejrzyj nasze przykładowe realizacje, a jeśli masz swój własny pomysł, chętnie zrealizujemy Twoje marzenie. Napisz do nas, a wspólnie stworzymy tort idealnie dopasowany do Twoich potrzeb!</CategorySiteDescSection>
-            </CategorySiteHeaderSection>
-            <CategorySiteContentSection>
-                {products.map((data,i)=>(
-                    <CategorySiteContentSectionProductCardContainer key={i+data.title} onClick={()=>setProductDetailData(data)}>
-                        <ProductCardImage src={data.img} width={150} height={150} alt="productimage" />
-                        {/* <ProductCardTitle>{data.title}</ProductCardTitle>
-                        <ProductCardDesc>{data.desc.length>50?data.desc.slice(0,50)+'...':data.desc}</ProductCardDesc> */}
-                    </CategorySiteContentSectionProductCardContainer>
-                ))}
-            </CategorySiteContentSection>
-            {/* <ProductDetailContainer productDetailData={productDetailData} >
-                    <ExitButton onClick={() => setProductDetailData(null)}>
-                        <BiSolidRightArrow />
-                    </ExitButton>
-                
-           <ProductCardImage src={'/images/logo.png'} width={150} height={150} alt="productimage" />
+  return(
+    <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
+      {setOnClickCategoryHandler && (
+        <ExitButton onClick={() => setOnClickCategoryHandler('')}>
+          <BiSolidRightArrow />
+        </ExitButton>
+      )}
+      <CategorySiteHeaderSection>
+        <MainImageCoitainer>
+          <CategorySiteTitleSection>Torty Urodzinowe</CategorySiteTitleSection>
+          <MainBirhdayCakeImage src={'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
+        </MainImageCoitainer>
+        <CategorySiteDescSection>
+          <span>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! </span>
+          <p>Oferujemy szeroki wybór wzorów i smaków, które uczynią każdą uroczystość niezapomnianą.<br/>
+                Przejrzyj nasze przykładowe realizacje, a jeśli masz swój własny pomysł, chętnie zrealizujemy Twoje marzenie.</p>
+          <p>
+                Napisz do nas, a wspólnie stworzymy tort idealnie dopasowany do Twoich potrzeb!
+          </p>
+          <div>
+            <a href="https://www.instagram.com/twoje_konto_na_instagramie" target="_blank" rel="noopener noreferrer" className="instagram-button">
+                    Wyślij swoją propozycje
+              <InstagramIcon />
+            </a>
+          </div>
+        </CategorySiteDescSection>
 
-</ProductDetailContainer> */}
-        </CategorySiteContainer>
-    )
-} 
+      </CategorySiteHeaderSection>
+      <CategorySiteContentSection>
+        {products.map((data,i)=>(
+          <CategorySiteContentSectionProductCardContainer key={i+data.title} onClick={()=>setProductDetailData(data)}>
+            <ProductCardImage src={data.img} width={150} height={150} alt="productimage" />
+
+          </CategorySiteContentSectionProductCardContainer>
+        ))}
+      </CategorySiteContentSection>
+    </CategorySiteContainer>
+  )
+}
 
 export default CategorySite
 
-
 const ProductsData:ProductDataInterface={
-    WeedingCakes:[
-        {
-            img:'/images/products/weedingCakes/image 2.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga'
-        },
-        {
-            img:'/images/products/weedingCakes/image 3.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga'
-        },
-        {
-            img:'/images/products/weedingCakes/image 2.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-        },
-        {
-            img:'/images/products/weedingCakes/image 2.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-        },
-        {
-            img:'/images/products/weedingCakes/image 2.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-        },
-        {
-            img:'/images/products/weedingCakes/image 2.png',
-            title:'Biała Róża',
-            desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-        }
-    ],
-    BirthdayCakes:[
-        {
-        img:'/images/products/birhdayCakes/438785376_18432739567025106_8958186019059700531_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+  WeedingCakes:[
+    {
+      img:'/images/products/weedingCakes/image 2.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga'
     },
-        {
-        img:'/images/products/birhdayCakes/449771117_18445963351025106_4722096168469771803_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/weedingCakes/image 3.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga'
     },
-        {
-        img:'/images/products/birhdayCakes/451705491_18448894129025106_1319351217688146439_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/weedingCakes/image 2.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/weedingCakes/image 2.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+    {
+      img:'/images/products/weedingCakes/image 2.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+    {
+      img:'/images/products/weedingCakes/image 2.png',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    }
+  ],
+  BirthdayCakes:[
+    {
+      img:'/images/products/birhdayCakes/438785376_18432739567025106_8958186019059700531_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+    {
+      img:'/images/products/birhdayCakes/449771117_18445963351025106_4722096168469771803_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+    {
+      img:'/images/products/birhdayCakes/451705491_18448894129025106_1319351217688146439_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    },
+    {
+      img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },//
-        {
-        img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/455247671_18453654796025106_6588465313754245470_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/457870078_18457483537025106_3007933157330030962_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/457870078_18457483537025106_3007933157330030962_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/458712063_18458444308025106_5156054030466713806_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/458712063_18458444308025106_5156054030466713806_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/460017699_18460268683025106_6907721994053293721_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/460017699_18460268683025106_6907721994053293721_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/461031148_18461603164025106_5223958142573169967_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/461031148_18461603164025106_5223958142573169967_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-        {
-        img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+    {
+      img:'/images/products/birhdayCakes/461249839_18461881108025106_3844387896724744961_n.jpg',
+      title:'Biała Róża',
+      desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },
-],
-    OccasionalSweets:[{
-        img:'/images/products/weedingCakes/image 2.png',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-    },],
-    CupCakes:[{
-        img:'/images/products/weedingCakes/image 2.png',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-    },],
-    SeetTables:[{
-        img:'/images/products/weedingCakes/image 2.png',
-        title:'Biała Róża',
-        desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
-    },]
+  ],
+  OccasionalSweets:[{
+    img:'/images/products/weedingCakes/image 2.png',
+    title:'Biała Róża',
+    desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+  },],
+  CupCakes:[{
+    img:'/images/products/weedingCakes/image 2.png',
+    title:'Biała Róża',
+    desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+  },],
+  SeetTables:[{
+    img:'/images/products/weedingCakes/image 2.png',
+    title:'Biała Róża',
+    desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
+  },]
 }

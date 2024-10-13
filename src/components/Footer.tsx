@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { AiFillInstagram ,AiFillFacebook} from "react-icons/ai";
 import Link from 'next/link';
-
+import React from 'react';
 const FooterContainer = styled.footer`
   background: ${(props) => props.theme.colors.gold};
   padding: ${(props) => props.theme.spacing.medium};
@@ -67,7 +67,7 @@ const IconLinkContainer=styled(Link)`
 `
 const Footer: React.FC = () => (
   <FooterContainer>
-     <a href="logo"><LogoImg src='/images/logo copy.png' alt="logoHeader" width={150} height={150} /></a>
+    <a href="logo"><LogoImg src='/images/logo copy.png' alt="logoHeader" width={150} height={150} /></a>
     <FotterTextContainer>
       <FotterTextColumn>
         <p>Regulamin</p>
