@@ -5,14 +5,8 @@ import GlobalStyle from '../styles/GlobalStyles';
 import theme from '../styles/theme';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MainSection from '@/components/MainSection';
 import styled from 'styled-components';
-import CategorySection from '@/components/CategorySection';
-import QuestionsSection from '@/components/QuestionsSection';
-import QualitySection from '@/components/QualitySection';
-import LocationSection from '@/components/LocationSection';
-import CategorySite from '@/components/CategorySite';
-
+import React from 'react';
 import Head from 'next/head';
 const Body = styled.body`
   display: flex;
@@ -29,7 +23,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Body>
-      <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <GlobalStyle />
           <Header />
           {children}

@@ -68,17 +68,17 @@ const DescriptonsCategoryCard=styled.p`
     font-size:${props=>props.theme.textSize.medium};
 `
 const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image,setOnClickCategoryHandler,id})=>(
-    <CategoryCardContainer onClick={()=>setOnClickCategoryHandler(id)} >
-       <CategoryCardImageContainer>
-            <CategoryCardBorder color={color}/>
-            <TitleCategoryCard color={color}>{title}</TitleCategoryCard>
-            <CatergoryCardImage src={image} alt="cardimage" layout="fill"/>
-       </CategoryCardImageContainer>
-       <DescriptionCategoryCardContainer color={color} >
-            <BlurBacground color={color}/>
-            <DescriptonsCategoryCard>{description}</DescriptonsCategoryCard>
-       </DescriptionCategoryCardContainer>
-    </CategoryCardContainer>
+  <CategoryCardContainer onClick={()=>setOnClickCategoryHandler(id)} >
+    <CategoryCardImageContainer>
+      <CategoryCardBorder color={color}/>
+      <TitleCategoryCard color={color}>{title}</TitleCategoryCard>
+      <CatergoryCardImage src={image} alt="cardimage" layout="fill"/>
+    </CategoryCardImageContainer>
+    <DescriptionCategoryCardContainer color={color} >
+      <BlurBacground color={color}/>
+      <DescriptonsCategoryCard>{description}</DescriptonsCategoryCard>
+    </DescriptionCategoryCardContainer>
+  </CategoryCardContainer>
 );
 
 export default CategoryCard

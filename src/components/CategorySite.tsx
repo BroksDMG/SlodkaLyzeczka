@@ -1,9 +1,10 @@
-import styled from "styled-components"
+import styled,{keyframes} from "styled-components"
 import { BiSolidRightArrow } from "react-icons/bi";
 import Image from "next/image";
 import { FaLocationArrow } from "react-icons/fa6";
 
 import React from "react";
+
 interface CatergorySiteInterface{
     onClickCategoryHandler:string;
     setOnClickCategoryHandler?:(id:string)=>void;
@@ -31,7 +32,6 @@ const CategorySiteContainer=styled.section<CatergorySiteInterface>`
     display: flex;
     flex-direction:column;
     align-items:center;
-    background-color:black;
     z-index:10;
     margin-left:5%;
     border-top-left-radius: 20px;
@@ -67,50 +67,21 @@ const CategorySiteContainer=styled.section<CatergorySiteInterface>`
     animation: ${props=>(props.onClickCategoryHandler?.length<=0? 'fadeOut' : 'fadeIn')} 0.5s ease-in-out forwards;
 
 `
-const ExitButton=styled.button`
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:${(props)=>props.theme.textSize.xlarge};
-    color:${(props)=>props.theme.colors.gold};
-    position:fixed;
-    top:20px;
-    left:0px;
-    z-index:10;
-    padding-left:4px;
-    border: none;
-    cursor: pointer;
-    background-color: red;
-    @keyframes slideIn {
-        from{
-            transform:translateX(0%);
-            background-color:red;
-        }
-        to{
-            transform:translateX(5%);
-            background-color:blue
-        }
-    }
-    &:hover{
-        animation: slideIn 0.5s ease-in forwards;
-    }
+const Test=styled.div`
     
-
-    /* opacity:100%; */
-    /* box-shadow:inset 20px 20px 20px rgba(0,0,0,0,0.05),25px 35px 20px rgba(0,0,0,0,0.05), 25px 30px 30px rgba(0,0,0,0,0.05), inset -20px -20px 25px rgba(255,255,255,0.9); */
+        z-index:15;
+        position:relative;
+        overflow-y:auto;
+    
 `
+
 const CategorySiteHeaderSection=styled.div`
-    height:100%;
     width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     position:relative;
-    padding-top: 20px;
 `
 const CategorySiteContentSection=styled.div`
     width:100%;
@@ -118,8 +89,8 @@ const CategorySiteContentSection=styled.div`
     display:flex;
     flex-wrap:wrap;
     gap:20px;
+    margin-top: 20px;
     justify-content:center;
-    padding:20px;
 `
 const CategorySiteContentSectionProductCardContainer=styled.div`
     display:flex;
@@ -136,24 +107,18 @@ const ProductCardImage=styled(Image)`
     border-top-left-radius:3%;
     border-top-right-radius:3%;
     object-fit:cover; 
-    z-index:20;
+    z-index:10;
     width:300px;
     height:auto;
     aspect-ratio:8/7;
     box-shadow: 2px 5px 15px 2px ${props=>props.theme.colors.blackShadow};
 `
-const MainBirhdayCakeImage = styled(Image)`
+const MainImage = styled(Image)`
     object-fit: cover;
     height: auto;
     width: 100%;
     object-position: center 57%;
     aspect-ratio: 10 / 3;
-`
-const ProductCardTitle=styled.h3` 
-    text-shadow: 2px 3px 6px ${props => props.theme.colors.textBlackShadow};
-`
-const ProductCardDesc=styled.span`
-     text-shadow: 2px 4px 4px ${props => props.theme.colors.textBlackShadow};
 `
 const CategorySiteTitleSection =styled.div`
     position: absolute;
@@ -164,7 +129,39 @@ const CategorySiteTitleSection =styled.div`
   font-weight: bold; 
   text-align: center; 
 `
-
+const grow = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+    
+  }
+`;
+const ExitButton=styled.button`
+    font-size:${(props)=>props.theme.textSize.xlarge};
+    color:${(props)=>props.theme.colors.textWhite};
+    background-color:${props=>props.theme.colors.goldIntense};
+    border: none;
+    border-top-right-radius:30%;
+    border-bottom-right-radius:30%;                          
+    padding: 10px 15px 10px 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;                       
+    position:fixed;                              
+    opacity: 0.8;                               
+    top:40px;
+    left:0px;
+    z-index:20;
+    &:hover {
+      /* Zwiększona przezroczystość przy hoverze */
+    animation: ${grow} 0.3s forwards;           /* Powiększenie przy hover */
+    opacity: 0.9;                             
+  }
+`
 const MainImageCoitainer=styled.div`
         display: flex;
     flex-direction: column;
@@ -176,7 +173,7 @@ const MainImageCoitainer=styled.div`
 const CategorySiteDescSection =styled.span`
    background-color: #f0f0f0;  /* Delikatne tło, aby wyróżnić tekst */
    width:100%;
-  padding: 40px 30px;  /* Duże wewnętrzne odstępy dla przestrzeni */
+  padding: 40px 30px;  /*Duże wewnętrzne odstępy dla przestrzeni*/
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* Subtelny cień dla efektu unoszenia */
   span{
     font-weight:bold;
@@ -196,14 +193,19 @@ const CategorySiteDescSection =styled.span`
   a{
     display: inline-flex;
     width:max-content;
-        align-items: center;
-        background-color:${props=>props.theme.colors.goldIntense};
-        color: white;
-        padding: 10px 20px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-size: 1.2rem;
-        transition: background-color 0.3s ease;
+    align-items: center;
+    background-color:${props=>props.theme.colors.goldIntense};
+    color: white;
+    padding: 5px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    &:hover {
+    /* Zwiększona przezroczystość przy hoverze */
+    animation: ${grow} 0.3s forwards;           /* Powiększenie przy hover */
+    opacity: 0.9;                             
+  }
   }
   
 `
@@ -214,10 +216,10 @@ const InstagramIcon = styled(FaLocationArrow )`
 `;
 const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
   const products = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || [];
-
+  console.log(products)
   return(
     <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
-      {setOnClickCategoryHandler && (
+      <Test>{setOnClickCategoryHandler && (
         <ExitButton onClick={() => setOnClickCategoryHandler('')}>
           <BiSolidRightArrow />
         </ExitButton>
@@ -225,7 +227,7 @@ const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,se
       <CategorySiteHeaderSection>
         <MainImageCoitainer>
           <CategorySiteTitleSection>Torty Urodzinowe</CategorySiteTitleSection>
-          <MainBirhdayCakeImage src={'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
+          <MainImage src={'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
         </MainImageCoitainer>
         <CategorySiteDescSection>
           <span>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! </span>
@@ -245,12 +247,12 @@ const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,se
       </CategorySiteHeaderSection>
       <CategorySiteContentSection>
         {products.map((data,i)=>(
-          <CategorySiteContentSectionProductCardContainer key={i+data.title} onClick={()=>setProductDetailData(data)}>
+          <CategorySiteContentSectionProductCardContainer key={i+data.title} >
             <ProductCardImage src={data.img} width={150} height={150} alt="productimage" />
 
           </CategorySiteContentSectionProductCardContainer>
         ))}
-      </CategorySiteContentSection>
+      </CategorySiteContentSection></Test>
     </CategorySiteContainer>
   )
 }
