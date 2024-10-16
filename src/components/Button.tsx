@@ -36,9 +36,9 @@ transition: background 0.3s ease, transform 0.2s ease;
   }
 `
 const Button :React.FC<ButtonProps>=({children, radius,fontSize})=>(
-    <ButtonContainer radius={radius} fontSize={fontSize}>
-        {children}
-    </ButtonContainer>
+  <ButtonContainer radius={radius} fontSize={fontSize}>
+    {children}
+  </ButtonContainer>
 )
 
 export default Button

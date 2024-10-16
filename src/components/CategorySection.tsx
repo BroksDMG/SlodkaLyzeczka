@@ -55,7 +55,7 @@ const qualityData=[
   {
     id:'CupCakes',
     color:theme.colors.pink,
-    image:'/images/slodkosciOkazjonalneCategorySectionImage.png',
+    image:'/images/BabeczkiCategorySectionImage.png',
     title:'Babeczki',
     description:'Słodkie chwile pełne magii, które uczynią każdą uroczystość niezapomnianą. Nasze torty okazjonalne są tworzone z dbałością o każdy detal, aby w pełni oddać charakter Twojej okazji',
 

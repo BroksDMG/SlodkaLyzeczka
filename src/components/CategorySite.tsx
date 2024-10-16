@@ -391,7 +391,7 @@ const ProductsData:ProductDataInterface={
     color:theme.colors.pink,
     categoryImage:'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg',
     categoryGallery:[{
-      img:'/images/products/weedingCakes/image 2.png',
+      img:'/images/products/cupCakes/362297710_18377495314025106_2276399099688762547_n.jpg',
       title:'Biała Róża',
       desc:'Jeśli żadne z powyższych kroków nie pomaga, uruchomienie ponownie komputera może rozwiązać problem zablokowanych plików lub katalogów.'
     },]},

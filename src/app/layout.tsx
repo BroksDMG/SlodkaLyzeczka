@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/GlobalStyles';
 import theme from '../styles/theme';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styled from 'styled-components';
 import React from 'react';
@@ -13,6 +12,7 @@ const Body = styled.body`
   min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
+  position:relative;
 `
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -25,7 +25,6 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <Body>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Header />
           {children}
           <Footer />
         </ThemeProvider>

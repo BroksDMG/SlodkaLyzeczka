@@ -1,14 +1,22 @@
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 import Image from 'next/image';
-
-const HeaderContainer = styled.header`
+import React from 'react';
+interface HeaderInterface{
+  isSticky:boolean;
+}
+const HeaderContainer = styled.header<{isSticky:boolean}>`
   background: ${(props) => props.theme.colors.background};
   /* padding: ${(props) => props.theme.spacing.medium}; */
   color: ${(props) => props.theme.colors.textGold};
   display: flex;
   font-size:${(props)=>props.theme.textSize.large};
   align-items: center; /* Dodano dla wyrównania elementów w pionie */
+  top:0;
+  position: sticky;
+  z-index:10;
+  transition: transform 0.6s ease;
+  transform: ${(props) => (props.isSticky ? 'translateY(0)' : 'translateY(-100%)')};
 `;
 
 const LogoImg = styled(Image)`
@@ -46,8 +54,8 @@ color:${(props)=>props.theme.colors.textGold};
 margin-right:10px;
 border:1px solid;
 `
-const Header: React.FC = () => (
-  <HeaderContainer>
+const Header: React.FC<HeaderInterface> = ({isSticky}) => (
+  <HeaderContainer isSticky={isSticky}>
     <a href="logo"><LogoImg src={logo} alt="logoHeader" width={150} height={150} /></a>
     <Nav>
       <NavList>
