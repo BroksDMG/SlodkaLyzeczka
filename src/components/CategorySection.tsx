@@ -1,14 +1,14 @@
 import styled, { keyframes } from "styled-components";
 import CategoryCard from "./CategoryCard";
 import theme from "@/styles/theme";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Tworzymy animację przesuwania w nieskończoność
 const scroll = keyframes`
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 `;
-// Kontener sekcji slidera
+
 const CategorySectionContainer = styled.section`
   width: 100%;
   height: 100vh;
@@ -17,17 +17,13 @@ const CategorySectionContainer = styled.section`
   align-items: center;
   overflow: hidden;
 `;
-// Kontener elementów slidera
-const SliderWrapper = styled.div`
+
+const SliderWrapper = styled.div<{ translateX: number; isDragging: boolean }>`
   display: flex;
   width: max-content;
-  animation: ${scroll} 40s linear infinite;
-  animation-play-state: running;
-  
-  &:hover {
-    animation-play-state: paused;
-    transition: all 0.5s ease; 
-  } 
+  transform: translateX(${({ translateX }) => translateX}px);
+  cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
+  transition: ${({ isDragging }) => (isDragging ? "none" : "transform 0.5s ease")};
 `;
 
 interface CategorySectionInterface {
@@ -35,25 +31,82 @@ interface CategorySectionInterface {
 }
 
 const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategoryHandler }) => {
-
   const sliderRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
+  const [initialTranslateX, setInitialTranslateX] = useState(0);
+  const [maxTranslateX, setMaxTranslateX] = useState(0);
+
+  useEffect(() => {
+    // Obliczamy maksymalne przesunięcie (szerokość slidera - szerokość widocznego obszaru)
+    const sliderWidth = sliderRef.current?.scrollWidth || 0;
+    const containerWidth = containerRef.current?.clientWidth || 0;
+    setMaxTranslateX(sliderWidth - containerWidth); // Maksymalna ilość przesunięcia w lewo
+  }, []);
+
+  // Dodajemy niestandardowy event listener z passive: false
+  useEffect(() => {
+    const container = containerRef.current;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault(); // Blokujemy domyślne przewijanie
+      setTranslateX((prev) => {
+        const newTranslateX = prev - e.deltaY;
+        return Math.max(Math.min(newTranslateX, 0), -maxTranslateX); // Ograniczamy przesunięcie w obu kierunkach
+      });
+    };
+
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [maxTranslateX]);
+
+  // Obsługa przeciągania
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX);
+    setInitialTranslateX(translateX); // Zapisujemy pozycję translateX przy rozpoczęciu
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.pageX - startX; // Ruch w poziomie
+    const newTranslateX = initialTranslateX + deltaX;
+    setTranslateX(Math.max(Math.min(newTranslateX, 0), -maxTranslateX)); // Ograniczamy przesunięcie w obu kierunkach
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
   return (
-    <CategorySectionContainer
-    >
-      <SliderWrapper ref={sliderRef}>
+    <CategorySectionContainer ref={containerRef}>
+      <SliderWrapper
+        ref={sliderRef}
+        translateX={translateX}
+        isDragging={isDragging}
+        onMouseMove={handleMouseMove}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp} // To make sure dragging stops when the cursor leaves the slider area
+      >
         {[...qualityData, ...qualityData].map((data, i) => (
-          <>{/* Powielamy elementy dla nieskończonego efektu */}
-            {console.log(qualityData)}
-            <CategoryCard
-              setOnClickCategoryHandler={setOnClickCategoryHandler}
-              id={data.id}
-              image={data.image}
-              key={data.image + i}
-              description={data.description}
-              title={data.title}
-              color={data.color}
-            /></>
+          <CategoryCard
+            setOnClickCategoryHandler={setOnClickCategoryHandler}
+            id={data.id}
+            image={data.image}
+            key={data.image + i}
+            description={data.description}
+            title={data.title}
+            color={data.color}
+          />
         ))}
       </SliderWrapper>
     </CategorySectionContainer>
