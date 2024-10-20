@@ -6,8 +6,8 @@ import theme from "@/styles/theme";
 import React from "react";
 
 interface CatergorySiteInterface{
-    onClickCategoryHandler:string;
-    setOnClickCategoryHandler?:(id:string)=>void;
+    $categoryId:string;
+    setCategoryId?:(id:string)=>void;
     productDetailData?:object;
 }
 interface Product {
@@ -72,7 +72,7 @@ const CategorySiteContainer=styled.section<CatergorySiteInterface>`
             opacity: 0;
         }
     }
-    animation: ${props=>(props.onClickCategoryHandler?.length<=0? 'fadeOut' : 'fadeIn')} 0.5s ease-in-out forwards;
+    animation: ${props=>(props.$categoryId?.length<=0? 'fadeOut' : 'fadeIn')} 0.5s ease-in-out forwards;
 
 `
 const Test=styled.div`
@@ -223,20 +223,20 @@ const InstagramIcon = styled(FaLocationArrow )`
   font-size: 24px;      
   transform: translateY(2px);
 `;
-const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,setOnClickCategoryHandler})=>{
-  const productsSiteData = ProductsData[onClickCategoryHandler as keyof ProductDataInterface] || {};
+const CategorySite :React.FC<CatergorySiteInterface>=({categoryId,setCategoryId})=>{
+  const productsSiteData = ProductsData[categoryId as keyof ProductDataInterface] || {};
   console.log(productsSiteData)
   return(
-    <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
-      <Test>{setOnClickCategoryHandler && (
-        <ExitButton onClick={() => setOnClickCategoryHandler('')}$bgColor={productsSiteData.color}>
+    <CategorySiteContainer $categoryId={categoryId} >
+      <Test>{setCategoryId && (
+        <ExitButton onClick={() => setCategoryId('')}$bgColor={productsSiteData.color}>
           <BiSolidRightArrow />
         </ExitButton>
       )}
       <CategorySiteHeaderSection $bgColor={productsSiteData.color}>
         <div>
           <h1>{productsSiteData.categoryTitle}</h1>
-          <MainImage src={productsSiteData.categoryImage?productsSiteData.categoryImage:'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
+          <MainImage src={productsSiteData.categoryImage||'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
         </div>
         <CategorySiteDescSection $bgColor={productsSiteData.color}>
           <span>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! </span>

@@ -28,10 +28,10 @@ const SliderWrapper = styled.div<{ $translateX: number; $isDragging: boolean }>`
 `;
 
 interface CategorySectionInterface {
-  setOnClickCategoryHandler: (id: string) => void;
+  setCategoryId: (id: string) => void;
 }
 
-const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategoryHandler }) => {
+const CategorySection: React.FC<CategorySectionInterface> = ({ setCategoryId }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -99,7 +99,7 @@ const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategor
         {[...qualityData, ...qualityData].map((data, i) => (
           <CategoryCard
             key={data.image + i}
-            setOnClickCategoryHandler={setOnClickCategoryHandler}
+            setCategoryId={setCategoryId}
             id={data.id}
             image={data.image}
             description={data.description}

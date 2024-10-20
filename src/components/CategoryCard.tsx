@@ -8,7 +8,7 @@ interface CategoryCardProps{
  image:string,
  description:string,
  color:string,
- setOnClickCategoryHandler:(id:string)=>void,
+ setCategoryId:(id:string)=>void,
 }
 const an = keyframes`
   from {
@@ -88,9 +88,9 @@ div{
 }
 `
 
-const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image,setOnClickCategoryHandler,id})=>{
+const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image,setCategoryId,id})=>{
   return(
-    <CategoryCardContainer onClick={()=>setOnClickCategoryHandler(id)} >
+    <CategoryCardContainer onClick={()=>setCategoryId(id)} >
       <CategoryCardImageContainer color={color}>
         <div color={color}/>
         <h1 color={color}>{title}</h1>

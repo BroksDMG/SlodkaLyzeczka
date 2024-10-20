@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import logo from '../assets/logo.png';
 import Image from 'next/image';
 import React from 'react';
 interface HeaderInterface{

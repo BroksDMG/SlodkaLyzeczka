@@ -10,7 +10,7 @@ import Header from '../components/Header';
 import { useState ,useEffect} from 'react';
 import React from 'react';
 const Home: NextPage = () => {
-  const [categoryCardOnClickHandler,setCategoryOnClickHandler]=useState('');
+  const [categoryId,setCategoryId]=useState('');
   const [isSticky, setIsSticky] = useState(true);
 
   useEffect(() => {
@@ -42,8 +42,8 @@ const Home: NextPage = () => {
       <Header isSticky={isSticky}/>
 
       <QualitySection/>
-      <CategorySection setOnClickCategoryHandler={setCategoryOnClickHandler}/>
-      <CategorySite onClickCategoryHandler={categoryCardOnClickHandler} setOnClickCategoryHandler={setCategoryOnClickHandler}/>
+      <CategorySection setCategoryId={setCategoryId}/>
+      <CategorySite categoryId={categoryId} setCategoryId={setCategoryId}/>
       <QuestionsSection/>
       <LocationSection/>
     </>
