@@ -24,6 +24,7 @@ const SliderWrapper = styled.div<{ translateX: number; isDragging: boolean }>`
   transform: translateX(${({ translateX }) => translateX}px);
   cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
   transition: ${({ isDragging }) => (isDragging ? "none" : "transform 0.5s ease")};
+  /* animation ${scroll} 40s k */
 `;
 
 interface CategorySectionInterface {
@@ -48,7 +49,7 @@ const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategor
 
   // Dodajemy niestandardowy event listener z passive: false
   useEffect(() => {
-    const container = containerRef.current;
+    const container = sliderRef.current;
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault(); // Blokujemy domyślne przewijanie
       setTranslateX((prev) => {
@@ -67,8 +68,6 @@ const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategor
       }
     };
   }, [maxTranslateX]);
-
-  // Obsługa przeciągania
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setStartX(e.pageX);
@@ -99,10 +98,10 @@ const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategor
       >
         {[...qualityData, ...qualityData].map((data, i) => (
           <CategoryCard
+            key={data.image + i}
             setOnClickCategoryHandler={setOnClickCategoryHandler}
             id={data.id}
             image={data.image}
-            key={data.image + i}
             description={data.description}
             title={data.title}
             color={data.color}
