@@ -5,7 +5,10 @@ import React from 'react';
 interface HeaderInterface{
   isSticky:boolean;
 }
-const HeaderContainer = styled.header<{isSticky:boolean}>`
+// interface StyledProps {
+//   $sticky?: boolean; // Declare the prop
+// }
+const HeaderContainer = styled.header<{ $sticky: boolean }>`
   background: ${(props) => props.theme.colors.background};
   /* padding: ${(props) => props.theme.spacing.medium}; */
   color: ${(props) => props.theme.colors.textGold};
@@ -16,7 +19,7 @@ const HeaderContainer = styled.header<{isSticky:boolean}>`
   position: sticky;
   z-index:10;
   transition: transform 0.6s ease;
-  transform: ${(props) => (props.isSticky ? 'translateY(0)' : 'translateY(-100%)')};
+  transform: ${(props ) => (props.$sticky ? 'translateY(0)' : 'translateY(-100%)')};
 `;
 
 const LogoImg = styled(Image)`
@@ -55,7 +58,7 @@ margin-right:10px;
 border:1px solid;
 `
 const Header: React.FC<HeaderInterface> = ({isSticky}) => (
-  <HeaderContainer isSticky={isSticky}>
+  <HeaderContainer $sticky={isSticky}>
     <a href="logo"><LogoImg src={logo} alt="logoHeader" width={150} height={150} /></a>
     <Nav>
       <NavList>

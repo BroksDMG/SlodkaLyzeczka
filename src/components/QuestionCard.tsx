@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
-
+import React from "react";
 interface QestionCardProps{
     answer:string
     question:string
@@ -31,20 +31,19 @@ const Answer=styled.div<{show:boolean}>`
     overflow: hidden;
 `
 const QuestionCard:React.FC<QestionCardProps>=({answer,question})=>{
-   const [showAnswer,setShowAnswer]=useState(false);
-    return(
-        <QuestionCardContainer>
-         <Question onClick={()=>setShowAnswer((e)=>!e)}>
-            <p>{question}</p>
+  const [showAnswer,setShowAnswer]=useState(false);
+  return(
+    <QuestionCardContainer>
+      <Question onClick={()=>setShowAnswer((e)=>!e)}>
+        <p>{question}</p>
         < MdOutlineKeyboardArrowDown/>
-         </Question>
-        <Answer show={showAnswer}>
-            {answer}
-        </Answer>
-         
-        </QuestionCardContainer>
-        )
-}
+      </Question>
+      <Answer show={showAnswer}>
+        {answer}
+      </Answer>
 
+    </QuestionCardContainer>
+  )
+}
 
 export default QuestionCard;
