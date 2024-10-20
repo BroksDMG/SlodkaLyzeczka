@@ -120,7 +120,7 @@ const MainImage = styled(Image)`
     object-position: center 57%;
     aspect-ratio: 10 / 3;
 `
-const CategorySiteHeaderSection=styled.div<{bgColor:string}>`
+const CategorySiteHeaderSection=styled.div<{$bgColor:string}>`
     width:100%;
     display:flex;
     justify-content:center;
@@ -138,7 +138,7 @@ const CategorySiteHeaderSection=styled.div<{bgColor:string}>`
     position: absolute;
     width:100%;
     background-color: rgba(255, 255, 255, 0.7);  /* Białe półprzezroczyste tło (70% przezroczystości) */
-    color: ${props=>props.bgColor||props.theme.colors.goldIntense}; 
+    color: ${props=>props.$bgColor||props.theme.colors.goldIntense}; 
     font-size: 34px;  
     font-weight: bold; 
     text-align: center;
@@ -154,10 +154,10 @@ const grow = keyframes`
     transform: scale(1.1);
   }
 `;
-const ExitButton=styled.button<{bgColor:string}>`
+const ExitButton=styled.button<{$bgColor:string}>`
     font-size:${(props)=>props.theme.textSize.xlarge};
     color:${(props)=>props.theme.colors.textWhite};
-    background-color:${props=>props.bgColor};
+    background-color:${props=>props.$bgColor};
     border: none;
     border-top-right-radius:30%;
     border-bottom-right-radius:30%;                          
@@ -179,7 +179,7 @@ const ExitButton=styled.button<{bgColor:string}>`
   }
 `
 
-const CategorySiteDescSection =styled.span<{bgColor:string}>`
+const CategorySiteDescSection =styled.span<{$bgColor:string}>`
    background-color: #f0f0f0;  /* Delikatne tło, aby wyróżnić tekst */
    width:100%;
   padding: 40px 30px;  /*Duże wewnętrzne odstępy dla przestrzeni*/
@@ -203,7 +203,7 @@ const CategorySiteDescSection =styled.span<{bgColor:string}>`
     display: inline-flex;
     width:max-content;
     align-items: center;
-    background-color:${props=>props.bgColor};
+    background-color:${props=>props.$bgColor};
     color: white;
     padding: 5px 20px;
     border-radius: 50px;
@@ -229,16 +229,16 @@ const CategorySite :React.FC<CatergorySiteInterface>=({onClickCategoryHandler,se
   return(
     <CategorySiteContainer onClickCategoryHandler={onClickCategoryHandler} >
       <Test>{setOnClickCategoryHandler && (
-        <ExitButton onClick={() => setOnClickCategoryHandler('')}bgColor={productsSiteData.color}>
+        <ExitButton onClick={() => setOnClickCategoryHandler('')}$bgColor={productsSiteData.color}>
           <BiSolidRightArrow />
         </ExitButton>
       )}
-      <CategorySiteHeaderSection bgColor={productsSiteData.color}>
+      <CategorySiteHeaderSection $bgColor={productsSiteData.color}>
         <div>
           <h1>{productsSiteData.categoryTitle}</h1>
-          <MainImage src={productsSiteData.categoryImage} width={1024} height={1024} alt="mainbirthdayimage" />
+          <MainImage src={productsSiteData.categoryImage?productsSiteData.categoryImage:'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
         </div>
-        <CategorySiteDescSection bgColor={productsSiteData.color}>
+        <CategorySiteDescSection $bgColor={productsSiteData.color}>
           <span>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! </span>
           <p>Oferujemy szeroki wybór wzorów i smaków, które uczynią każdą uroczystość niezapomnianą.<br/>
                 Przejrzyj nasze przykładowe realizacje, a jeśli masz swój własny pomysł, chętnie zrealizujemy Twoje marzenie.</p>

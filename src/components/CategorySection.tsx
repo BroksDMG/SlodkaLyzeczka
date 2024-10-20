@@ -18,12 +18,12 @@ const CategorySectionContainer = styled.section`
   overflow: hidden;
 `;
 
-const SliderWrapper = styled.div<{ translateX: number; isDragging: boolean }>`
+const SliderWrapper = styled.div<{ $translateX: number; $isDragging: boolean }>`
   display: flex;
   width: max-content;
-  transform: translateX(${({ translateX }) => translateX}px);
-  cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
-  transition: ${({ isDragging }) => (isDragging ? "none" : "transform 0.5s ease")};
+  transform: translateX(${({ $translateX }) => $translateX}px);
+  cursor: ${({ $isDragging }) => ($isDragging ? "grabbing" : "grab")};
+  transition: ${({ $isDragging }) => ($isDragging ? "none" : "transform 0.5s ease")};
   /* animation ${scroll} 40s k */
 `;
 
@@ -89,8 +89,8 @@ const CategorySection: React.FC<CategorySectionInterface> = ({ setOnClickCategor
     <CategorySectionContainer ref={containerRef}>
       <SliderWrapper
         ref={sliderRef}
-        translateX={translateX}
-        isDragging={isDragging}
+        $translateX={translateX}
+        $isDragging={isDragging}
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

@@ -23,11 +23,11 @@ const Question=styled.div`
     cursor: pointer;
     font-weight:bold;
 `
-const Answer=styled.div<{show:boolean}>`
+const Answer=styled.div<{$show:boolean}>`
     width:100%;
     transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
-    opacity: ${props => (props.show ? 1 : 0)};
-    max-height: ${props => (props.show ? '100vh' : '0')}; /* For smooth collapse */
+    opacity: ${props => (props.$show ? 1 : 0)};
+    max-height: ${props => (props.$show ? '100vh' : '0')}; /* For smooth collapse */
     overflow: hidden;
 `
 const QuestionCard:React.FC<QestionCardProps>=({answer,question})=>{
@@ -38,7 +38,7 @@ const QuestionCard:React.FC<QestionCardProps>=({answer,question})=>{
         <p>{question}</p>
         < MdOutlineKeyboardArrowDown/>
       </Question>
-      <Answer show={showAnswer}>
+      <Answer $show={showAnswer}>
         {answer}
       </Answer>
 
