@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import React from "react";
 interface StageCardProps{
     image: string;
   video: string;
@@ -26,10 +27,10 @@ const Filter = styled.div`
   z-index:1;
 `
 const StageCard: React.FC<StageCardProps> = ({ image, video, SetCurrentStageVideo }) => (
-    <StageCardContainer onClick={() => SetCurrentStageVideo(video)}>
-      <Filter />
-      <StageCardImage src={image} alt="stage image" layout="fill" />
-    </StageCardContainer>
-  );
+  <StageCardContainer onClick={() => SetCurrentStageVideo(video)}>
+    <Filter />
+    <StageCardImage src={image} alt="stage image" fill />
+  </StageCardContainer>
+);
 
 export default StageCard;

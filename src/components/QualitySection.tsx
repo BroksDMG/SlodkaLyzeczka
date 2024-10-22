@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import React from "react";
 const QualitySectionContainer=styled.section`
     width:100%;
     height:100vh;
@@ -23,7 +24,7 @@ const QualityCardTitleContainer=styled.div`
 `
 const QualityCardTitle=styled.h1`
     font-size:${(props)=>props.theme.textSize.xlarge};
-` 
+`
 const QualityCardContainer=styled.ul`
     width:100%;
     position:relative;
@@ -61,45 +62,44 @@ const QualityCard=styled.div`
   text-align:center;
 `
 const QualitySection :React.FC=()=>{
-    
-    return(
-        <QualitySectionContainer>
-            <QualityCardTitleContainer>
-                <QualityCardTitle>Nasze wyjątkowe wypieki</QualityCardTitle>
-                <p>Nasza cukiernia oferuje szeroki wybór pysznych wypierków, które są niepowtarzalne pod względem smaku i jakości. 
-                    Każdy produkt jest starannie przygotowywany z najlepszych składników, 
+
+  return(
+    <QualitySectionContainer>
+      <QualityCardTitleContainer>
+        <QualityCardTitle>Nasze wyjątkowe wypieki</QualityCardTitle>
+        <p>Nasza cukiernia oferuje szeroki wybór pysznych wypierków, które są niepowtarzalne pod względem smaku i jakości.
+                    Każdy produkt jest starannie przygotowywany z najlepszych składników,
                     aby dostarczyć ci niezapomniane doznania smakowe
-                </p>
-            </QualityCardTitleContainer>
-            <QualityCardContainer>
-                <QualityCard>
-                <CategoryCardImageContainer>
-                        <CatergoryCardImage src='/images/QualityImageAnimals.png'alt="cardimage" layout="fill"/>
-                </CategoryCardImageContainer>
-                        <h1>Ręczne wykonanie specjałów</h1>
-                        <p>Każdy wypiek jest starannie przygotowywany ręcznie, co gwarantuje najwyższą jakość i unikalny charakter naszych produktów</p>
-                </QualityCard>
-                <QualityCard>
-                <CategoryCardImageContainer>
-                    <CatergoryCardImage src='/images/QualityImageSingleCake.png'alt="cardimage" layout="fill"/>
-                </CategoryCardImageContainer>
-                <h1>Indywidualne zamówienia</h1>
+        </p>
+      </QualityCardTitleContainer>
+      <QualityCardContainer>
+        <QualityCard>
+          <CategoryCardImageContainer>
+            <CatergoryCardImage src='/images/QualityImageAnimals.png'alt="cardimage" fill/>
+          </CategoryCardImageContainer>
+          <h1>Ręczne wykonanie specjałów</h1>
+          <p>Każdy wypiek jest starannie przygotowywany ręcznie, co gwarantuje najwyższą jakość i unikalny charakter naszych produktów</p>
+        </QualityCard>
+        <QualityCard>
+          <CategoryCardImageContainer>
+            <CatergoryCardImage src='/images/QualityImageSingleCake.png'alt="cardimage" fill/>
+          </CategoryCardImageContainer>
+          <h1>Indywidualne zamówienia</h1>
 
-                        <p>Tworzymy wypieki na specjalne zamówienie, dostosowane do indywidualnych potrzeb i preferencji naszych klientów</p>
-                </QualityCard>
-                <QualityCard>
-                <CategoryCardImageContainer>
-                    <CatergoryCardImage src='/images/QualityImageCakes.png'alt="cardimage" layout="fill"/>
-                </CategoryCardImageContainer>
-                <h1>Kunszt cukierniczy</h1>
+          <p>Tworzymy wypieki na specjalne zamówienie, dostosowane do indywidualnych potrzeb i preferencji naszych klientów</p>
+        </QualityCard>
+        <QualityCard>
+          <CategoryCardImageContainer>
+            <CatergoryCardImage src='/images/QualityImageCakes.png'alt="cardimage" fill/>
+          </CategoryCardImageContainer>
+          <h1>Kunszt cukierniczy</h1>
 
-                        <p>Nasz zespół to doświadczeni cukiernicy, którzy wkładają serce i duszę w każdy wypiek, dbając o każdy detal</p>
-                </QualityCard>
-                    
-                        
-            </QualityCardContainer>
-        </QualitySectionContainer>
-    );
+          <p>Nasz zespół to doświadczeni cukiernicy, którzy wkładają serce i duszę w każdy wypiek, dbając o każdy detal</p>
+        </QualityCard>
+
+      </QualityCardContainer>
+    </QualitySectionContainer>
+  );
 }
 
 export default QualitySection;

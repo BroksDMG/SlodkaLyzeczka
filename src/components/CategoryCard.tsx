@@ -94,7 +94,7 @@ const CategoryCard :React.FC<CategoryCardProps>=({title,description,color,image,
       <CategoryCardImageContainer color={color}>
         <div color={color}/>
         <h1 color={color}>{title}</h1>
-        <CatergoryCardImage src={image} alt="cardimage" layout="fill"/>
+        <CatergoryCardImage src={image} alt="cardimage" fill/>
       </CategoryCardImageContainer>
       <DescriptionCategoryCardContainer className="description" color={color} >
         <div color={color}/>

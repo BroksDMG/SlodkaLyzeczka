@@ -5,6 +5,7 @@ import Button from './Button';
 import { BiSolidLeftArrow,BiSolidRightArrow } from "react-icons/bi";
 import StageCard from './StageCard';
 import theme from '@/styles/theme';
+import React from 'react';
 const MainContainer = styled.section`
   position: relative;
   width: 100%;
@@ -76,52 +77,52 @@ const ButtonContainer=styled.div`
     justify-content:center;
 `
 const MainSection: React.FC = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [stagesData,setStagesData]=useState(
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [stagesData,setStagesData]=useState(
     [
-        {
-            imagePath:'/images/Stage0.jpg',
-            videoPath:'/videos/main.mp4',
-        },
-        {
-            imagePath:'/images/Stage1.jpg',
-            videoPath:'/videos/Ciastko.mp4',
-        },
-        {
-            imagePath:'/images/Stage2.jpg',
-            videoPath:'/videos/Babeczki.mp4',
-        },
+      {
+        imagePath:'/images/Stage0.jpg',
+        videoPath:'/videos/main.mp4',
+      },
+      {
+        imagePath:'/images/Stage1.jpg',
+        videoPath:'/videos/Ciastko.mp4',
+      },
+      {
+        imagePath:'/images/Stage2.jpg',
+        videoPath:'/videos/Babeczki.mp4',
+      },
     ]
-    )
-    const [currentStageVideo,SetCurrentStageVideo]=useState('');
+  )
+  const [currentStageVideo,SetCurrentStageVideo]=useState('');
 
-    useEffect(() => {
-      if (videoRef.current) {
-        videoRef.current.playbackRate = 0.7; // Ustaw prędkość odtwarzania wideo na 0.5x
-      }
-    }, []);
-    return (
-      <MainContainer>
-        <Filter />
-        
-       <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} />
-        <TextContainer>
-            <TextTitle>Zanurz się w słodką magię każdej łyżeczki!</TextTitle>
-            <NormalText>
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.7; // Ustaw prędkość odtwarzania wideo na 0.5x
+    }
+  }, []);
+  return (
+    <MainContainer>
+      <Filter />
+
+      <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} />
+      <TextContainer>
+        <TextTitle>Zanurz się w słodką magię każdej łyżeczki!</TextTitle>
+        <NormalText>
                 W Słodkiej Łyżeczce każde nasze wypieki są ręcznie robione, dodając odrobinę magii
                 do każdej okazji. Od wyjątkowych tortów ślubnych przez słodkie stoły po pyszszne babeczki - każdy kęs to czysta rozkosz
-            </NormalText>
-            <NormalCenterText>Sprawdź naszą ofertę i zasmakuj słodkich przyjemności</NormalCenterText>
-            <ButtonContainer>
-            <Button radius='10px' >Sprawdź!</Button>
+        </NormalText>
+        <NormalCenterText>Sprawdź naszą ofertę i zasmakuj słodkich przyjemności</NormalCenterText>
+        <ButtonContainer>
+          <Button radius='10px' >Sprawdź!</Button>
 
-            </ButtonContainer>
-        </TextContainer>
-        <StageContainer>
-            <Section>
-            <Button radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
-            <Button radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
-             {stagesData.map((stageData, index) => (
+        </ButtonContainer>
+      </TextContainer>
+      <StageContainer>
+        <Section>
+          <Button radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
+          <Button radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
+          {stagesData.map((stageData, index) => (
             <StageCard
               key={index}
               image={stageData.imagePath}
@@ -129,13 +130,12 @@ const MainSection: React.FC = () => {
               SetCurrentStageVideo={SetCurrentStageVideo}
             />
           ))}
-            </Section>
-        </StageContainer>
-        
-       
-        {/* <VideoSource ref={videoRef} src="/videos/main.mp4" autoPlay muted loop /> */}
-        <VideoSource ref={videoRef} src={currentStageVideo} autoPlay muted loop />
-      </MainContainer>
-    );
-  };
+        </Section>
+      </StageContainer>
+
+      {/* <VideoSource ref={videoRef} src="/videos/main.mp4" autoPlay muted loop /> */}
+      <VideoSource ref={videoRef} src={currentStageVideo} autoPlay muted loop />
+    </MainContainer>
+  );
+};
 export default MainSection;
