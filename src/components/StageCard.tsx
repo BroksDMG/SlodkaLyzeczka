@@ -29,7 +29,7 @@ const Filter = styled.div`
 const StageCard: React.FC<StageCardProps> = ({ image, video, SetCurrentStageVideo }) => (
   <StageCardContainer onClick={() => SetCurrentStageVideo(video)}>
     <Filter />
-    <StageCardImage src={image} alt="stage image" fill />
+    <StageCardImage src={image} alt="stage image" fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
   </StageCardContainer>
 );
 

@@ -236,7 +236,7 @@ const CategorySite :React.FC<CatergorySiteInterface>=({categoryId,setCategoryId}
       <CategorySiteHeaderSection $bgColor={productsSiteData.color}>
         <div>
           <h1>{productsSiteData.categoryTitle}</h1>
-          <MainImage src={productsSiteData.categoryImage||'/images/products/birhdayCakes/MainBirhdayCakeImage.jpg'} width={1024} height={1024} alt="mainbirthdayimage" />
+          <MainImage src={productsSiteData.categoryImage} width={1024} height={1024} alt="mainbirthdayimage" />
         </div>
         <CategorySiteDescSection $bgColor={productsSiteData.color}>
           <span>W tym miejscu znajdziesz inspiracje na wyjątkowe torty urodzinowe! </span>

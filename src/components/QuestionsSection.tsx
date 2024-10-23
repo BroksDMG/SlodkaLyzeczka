@@ -60,7 +60,7 @@ const QuestionsSection :React.FC=()=>{
         <p>Znajdź odpowiedzi na najczęściej zadawane pytani dotyczące naszych wypieków. Nie trać czasu i uzyskaj odpowiedz na nutrujące pytania</p>
         <QusetionSecitionImageContainer>
 
-          <QuestionSectionImage src='/images/MisQuestioSeciton.png' alt='mis qustion section' fill/>
+          <QuestionSectionImage src='/images/MisQuestioSeciton.png' alt='mis qustion section' fill sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
         </QusetionSecitionImageContainer>
       </QuestionSectionSideBar>
       <QuestionSectionContainerQuestionCard>

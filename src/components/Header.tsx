@@ -58,7 +58,7 @@ border:1px solid;
 `
 const Header: React.FC<HeaderInterface> = ({isSticky}) => (
   <HeaderContainer $sticky={isSticky}>
-    <a href="logo"><LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} /></a>
+    <a href="logo"><LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} priority /></a>
     <Nav>
       <NavList>
         <NavItem><a href="Kontakt">Kontakt</a></NavItem>

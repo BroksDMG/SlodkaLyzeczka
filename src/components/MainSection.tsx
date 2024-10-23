@@ -105,7 +105,7 @@ const MainSection: React.FC = () => {
     <MainContainer>
       <Filter />
 
-      <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} />
+      <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} priority/>
       <TextContainer>
         <TextTitle>Zanurz się w słodką magię każdej łyżeczki!</TextTitle>
         <NormalText>
