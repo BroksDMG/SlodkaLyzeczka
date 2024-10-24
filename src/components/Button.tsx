@@ -5,6 +5,7 @@ interface ButtonProps{
     children:React.ReactNode;
     radius:string;
     fontSize?:string
+    onClick?:()=>void;
 }
 
 const ButtonContainer=styled.button<ButtonProps>`
@@ -35,8 +36,8 @@ transition: background 0.3s ease, transform 0.2s ease;
     transform: translateY(4px); 
   }
 `
-const Button :React.FC<ButtonProps>=({children, radius,fontSize})=>(
-  <ButtonContainer radius={radius} fontSize={fontSize}>
+const Button :React.FC<ButtonProps>=({onClick,children, radius,fontSize})=>(
+  <ButtonContainer onClick={onClick} radius={radius} fontSize={fontSize}>
     {children}
   </ButtonContainer>
 )

@@ -49,7 +49,7 @@ const LocationSection:React.FC=()=>{
         <p>Telefon: xxx-xxx-xxx</p>
         <p>Email: słodkałyżeczka@mail.pl</p>
       </LocationTextContainer>
-      <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image' fill sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/></LocationMapContainer>
+      <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image' fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/></LocationMapContainer>
     </LocationSectionContainer>
   )
 }

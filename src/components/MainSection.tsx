@@ -78,24 +78,26 @@ const ButtonContainer=styled.div`
 `
 const MainSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [stagesData,setStagesData]=useState(
-    [
-      {
-        imagePath:'/images/Stage0.jpg',
-        videoPath:'/videos/main.mp4',
-      },
-      {
-        imagePath:'/images/Stage1.jpg',
-        videoPath:'/videos/Ciastko.mp4',
-      },
-      {
-        imagePath:'/images/Stage2.jpg',
-        videoPath:'/videos/Babeczki.mp4',
-      },
-    ]
-  )
-  const [currentStageVideo,SetCurrentStageVideo]=useState('');
-
+  const stagesData=[
+    {
+      imagePath:'/images/Stage0.jpg',
+      videoPath:'/videos/main.mp4',
+    },
+    {
+      imagePath:'/images/Stage1.jpg',
+      videoPath:'/videos/Ciastko.mp4',
+    },
+    {
+      imagePath:'/images/Stage2.jpg',
+      videoPath:'/videos/Babeczki.mp4',
+    },
+  ]
+  const [currentStageVideo,SetCurrentStageVideo]=useState('/videos/main.mp4');
+  function buttonHandler(i:number) {
+    let a= stagesData.findIndex((stage)=>stage.videoPath===currentStageVideo)
+    SetCurrentStageVideo(stagesData[a+=i]?.videoPath)
+  }
+  console.log(currentStageVideo)
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.7; // Ustaw prędkość odtwarzania wideo na 0.5x
@@ -120,8 +122,8 @@ const MainSection: React.FC = () => {
       </TextContainer>
       <StageContainer>
         <Section>
-          <Button radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
-          <Button radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
+          <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
+          <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
           {stagesData.map((stageData, index) => (
             <StageCard
               key={index}
