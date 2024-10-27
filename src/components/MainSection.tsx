@@ -14,7 +14,7 @@ const MainContainer = styled.section`
   color:${props=>props.theme.colors.textWhite   };
 `;
 const VideoSource = styled.video`
-    position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
@@ -22,8 +22,11 @@ const VideoSource = styled.video`
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
-  opacity:50%;
-`
+  opacity: 0.5;
+  transition: all 0.5s ease;
+
+ 
+`;
 const LogoImg = styled(Image)`
   max-width: 300px;
   margin-left:${props=>props.theme.spacing.medium};
@@ -56,21 +59,22 @@ const NormalCenterText=styled.p`
     font-size:${props=>props.theme.textSize.medium};
     text-align:center;
 `
-const StageContainer =styled.div`
-    width:100%;
-    display:flex;
-    justify-content:end;
-    align-items:end;
-    height:100vh;
-`
-const Section =styled.section`
-    width:50%;
-    display:flex;
-    gap:${props=>props.theme.spacing.medium};
-    align-items:end;
-    margin-bottom:${props=>props.theme.spacing.xlarge};
-    margin-right:${props=>props.theme.spacing.medium};
-`
+const StageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  height: 100vh;
+  position:relative;
+  div {
+    width: 50%;
+    display: flex;
+    gap: ${props => props.theme.spacing.medium};
+    align-items: end;
+    margin-bottom: ${props => props.theme.spacing.xlarge};
+    margin-right: ${props => props.theme.spacing.medium};
+  }
+`;
 const ButtonContainer=styled.div`
         display:flex;
         width:100%;
@@ -78,31 +82,32 @@ const ButtonContainer=styled.div`
 `
 const MainSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const stagesData=[
-    {
-      imagePath:'/images/Stage0.jpg',
-      videoPath:'/videos/main.mp4',
-    },
-    {
-      imagePath:'/images/Stage1.jpg',
-      videoPath:'/videos/Ciastko.mp4',
-    },
-    {
-      imagePath:'/images/Stage2.jpg',
-      videoPath:'/videos/Babeczki.mp4',
-    },
-  ]
-  const [currentStageVideo,SetCurrentStageVideo]=useState('/videos/main.mp4');
-  function buttonHandler(i:number) {
-    let a= stagesData.findIndex((stage)=>stage.videoPath===currentStageVideo)
-    SetCurrentStageVideo(stagesData[a+=i]?.videoPath)
-  }
-  console.log(currentStageVideo)
+  const [currentStageVideo, SetCurrentStageVideo] = useState('/videos/main.mp4');
+  const [activeIndex, setActiveIndex] = useState(0); // Dodajemy activeIndex do stanu
+
+  const stagesData = [
+    { imagePath: '/images/Stage0.jpg', videoPath: '/videos/main.mp4' },
+    { imagePath: '/images/Stage1.jpg', videoPath: '/videos/Ciastko.mp4' },
+    { imagePath: '/images/Stage2.jpg', videoPath: '/videos/Babeczki.mp4' },
+  ];
+
+  const handleSceneChange = (newVideo: string, index: number) => {
+    SetCurrentStageVideo(newVideo);
+    setActiveIndex(index);
+  };
+
+  const buttonHandler = (i: number) => {
+    const newIndex = (activeIndex + i + stagesData.length) % stagesData.length;
+    SetCurrentStageVideo(stagesData[newIndex].videoPath);
+    setActiveIndex(newIndex);
+  };
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.7; // Ustaw prędkość odtwarzania wideo na 0.5x
+      videoRef.current.playbackRate = 0.7;
     }
   }, []);
+
   return (
     <MainContainer>
       <Filter />
@@ -120,8 +125,8 @@ const MainSection: React.FC = () => {
 
         </ButtonContainer>
       </TextContainer>
-      <StageContainer>
-        <Section>
+      <StageContainer >
+        <div>
           <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
           <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
           {stagesData.map((stageData, index) => (
@@ -129,14 +134,15 @@ const MainSection: React.FC = () => {
               key={index}
               image={stageData.imagePath}
               video={stageData.videoPath}
-              SetCurrentStageVideo={SetCurrentStageVideo}
+              setCurrentStageVideo={() => handleSceneChange(stageData.videoPath, index)}
+              isActive={index === activeIndex}
             />
           ))}
-        </Section>
+        </div>
       </StageContainer>
 
       {/* <VideoSource ref={videoRef} src="/videos/main.mp4" autoPlay muted loop /> */}
-      <VideoSource ref={videoRef} src={currentStageVideo} autoPlay muted loop />
+      <VideoSource  ref={videoRef} src={currentStageVideo} autoPlay muted loop />
     </MainContainer>
   );
 };
