@@ -59,22 +59,26 @@ const NormalCenterText=styled.p`
     font-size:${props=>props.theme.textSize.medium};
     text-align:center;
 `
-const StageContainer = styled.div`
+
+const StageContainer = styled.div<{$activeIndex:number}>`
   width: 100%;
   display: flex;
   justify-content: end;
   align-items: end;
   height: 100vh;
-  position:relative;
-  div {
+  >div {
     width: 50%;
+    height:35vh;
     display: flex;
     gap: ${props => props.theme.spacing.medium};
-    align-items: end;
     margin-bottom: ${props => props.theme.spacing.xlarge};
-    margin-right: ${props => props.theme.spacing.medium};
   }
+  /* &:nth-child(${props=>props.$activeIndex+1}){ */
+    /* animation: {showStage} 0.5s linear 1 forwards; */
+    /* height:100vh
+  } */
 `;
+
 const ButtonContainer=styled.div`
         display:flex;
         width:100%;
@@ -125,10 +129,10 @@ const MainSection: React.FC = () => {
 
         </ButtonContainer>
       </TextContainer>
-      <StageContainer >
+      <StageContainer $activeIndex={activeIndex} >
+        <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
+        <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
         <div>
-          <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
-          <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
           {stagesData.map((stageData, index) => (
             <StageCard
               key={index}
@@ -136,6 +140,7 @@ const MainSection: React.FC = () => {
               video={stageData.videoPath}
               setCurrentStageVideo={() => handleSceneChange(stageData.videoPath, index)}
               isActive={index === activeIndex}
+              index={index}
             />
           ))}
         </div>
