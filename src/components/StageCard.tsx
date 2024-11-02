@@ -14,28 +14,19 @@ object-fit:cover;
 `
 
 const showStage = (index:number)=>keyframes`
-
-   15%{
-    transform:scale(1.3) translateY(-10%) translateX(5%*index);
+   from{
+    transform:scale(1.3) translateY(-10%) ;
    }
-   30%{
-     transform:scale(2) scaleX(${1.5*index/2}) translateY(-15%) translateX(-5%*index);
-     opacity:0.4
-   }
-   50%{
-    transform:scale(2.5) scaleX(${2*index/2})  translateY(-20%) translateX(-10%*index);
-    opacity:0.4
-   }
-   70%{
-    transform:scale(2.5) scaleX(${2.5*index/2})  translateY(-25%) translateX(-15%*index);
-    opacity:0.4
-   }
-   100%{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-25%);
+   to{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-${15*index}%);
     opacity:0.2}
 `
+
+// if (i === 1) {
+//   setTimeout(()=>SetStagesData([...stagesData.slice(1), stagesData[0]]),400);
+// } else if (i === -1) {
+//   SetStagesData( [stagesData[stagesData.length - 1], ...stagesData.slice(0, -1)]);
+// }
 const StageCardContainer = styled.div<{ $isActive: boolean,$index:number }>`
-  /* width: 13em;
-  height: 35vh; */
   position: relative;
   overflow: hidden;
   z-index:2;
@@ -45,9 +36,6 @@ const StageCardContainer = styled.div<{ $isActive: boolean,$index:number }>`
   ${(props)=>props.$isActive&&css`
     animation: ${showStage(props.$index)} 0.3s linear ;
     opacity:0.5;
-    /* transform:scale(2)  translateY(-15%) ; */
-
-    
   `}
 `;
 const StageCard: React.FC<StageCardProps> = ({ image, video,  setCurrentStageVideo, isActive,index }) => (
