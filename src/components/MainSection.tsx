@@ -66,17 +66,13 @@ const StageContainer = styled.div<{$activeIndex:number}>`
   justify-content: end;
   align-items: end;
   height: 100vh;
-  >div {
+  .slider {
     width: 50%;
     height:35vh;
     display: flex;
     gap: ${props => props.theme.spacing.medium};
     margin-bottom: ${props => props.theme.spacing.xlarge};
   }
-  /* &:nth-child(${props=>props.$activeIndex+1}){ */
-    /* animation: {showStage} 0.5s linear 1 forwards; */
-    /* height:100vh
-  } */
 `;
 
 const ButtonContainer=styled.div`
@@ -89,11 +85,11 @@ const MainSection: React.FC = () => {
   const [currentStageVideo, SetCurrentStageVideo] = useState('/videos/main.mp4');
   const [activeIndex, setActiveIndex] = useState(0); // Dodajemy activeIndex do stanu
 
-  const stagesData = [
+  const [stagesData,setStagesData] = useState([
     { imagePath: '/images/Stage0.jpg', videoPath: '/videos/main.mp4' },
     { imagePath: '/images/Stage1.jpg', videoPath: '/videos/Ciastko.mp4' },
     { imagePath: '/images/Stage2.jpg', videoPath: '/videos/Babeczki.mp4' },
-  ];
+  ]);
 
   const handleSceneChange = (newVideo: string, index: number) => {
     SetCurrentStageVideo(newVideo);
@@ -104,6 +100,14 @@ const MainSection: React.FC = () => {
     const newIndex = (activeIndex + i + stagesData.length) % stagesData.length;
     SetCurrentStageVideo(stagesData[newIndex].videoPath);
     setActiveIndex(newIndex);
+    // setTimeout(() => {
+    //   if (i === 1) {
+    //     setStagesData([...stagesData.slice(1), stagesData[0]]);
+    //   } else if (i === -1) {
+    //     setStagesData([stagesData[stagesData.length - 1], ...stagesData.slice(0, -1)]);
+    //     setActiveIndex(0)
+    //   }
+    // }, 300);
   };
 
   useEffect(() => {
@@ -132,7 +136,7 @@ const MainSection: React.FC = () => {
       <StageContainer $activeIndex={activeIndex} >
         <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
         <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
-        <div>
+        <div className='slider'>
           {stagesData.map((stageData, index) => (
             <StageCard
               key={index}
@@ -140,7 +144,8 @@ const MainSection: React.FC = () => {
               video={stageData.videoPath}
               setCurrentStageVideo={() => handleSceneChange(stageData.videoPath, index)}
               isActive={index === activeIndex}
-              index={index}
+              index={activeIndex}
+              Xtranslate={(index - activeIndex) * 10}
             />
           ))}
         </div>

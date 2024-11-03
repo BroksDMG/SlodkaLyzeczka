@@ -8,10 +8,8 @@ interface StageCardProps{
    setCurrentStageVideo: (video: string) => void;
   isActive:boolean;
   index:number;
+  Xtranslate:number;
 }
-const StageCardImage= styled(Image)`
-object-fit:cover;
-`
 
 const showStage = (index:number)=>keyframes`
    from{
@@ -20,27 +18,45 @@ const showStage = (index:number)=>keyframes`
    to{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-${15*index}%);
     opacity:0.2}
 `
+const lastStage=()=>keyframes`
+  from{
+    width:0;
+  }
+  to{
+    width:100%;
+}
+`
 
-// if (i === 1) {
-//   setTimeout(()=>SetStagesData([...stagesData.slice(1), stagesData[0]]),400);
-// } else if (i === -1) {
-//   SetStagesData( [stagesData[stagesData.length - 1], ...stagesData.slice(0, -1)]);
-// }
-const StageCardContainer = styled.div<{ $isActive: boolean,$index:number }>`
+const StageCardContainer = styled.div<{ $isActive: boolean,$index:number,$Xtranslate:number }>`
   position: relative;
   overflow: hidden;
+  width:100%;
   z-index:2;
   border-radius: 8px;
   min-width: 10em;
   cursor: pointer;
+  opacity:0.5;
+  transition: transform 0.3s ease;
+  transform: translateX(-${(props) => props.$index * 100}%);
   ${(props)=>props.$isActive&&css`
     animation: ${showStage(props.$index)} 0.3s linear ;
-    opacity:0.5;
   `}
 `;
-const StageCard: React.FC<StageCardProps> = ({ image, video,  setCurrentStageVideo, isActive,index }) => (
-  <StageCardContainer className="stageCard" onClick={() =>  setCurrentStageVideo(video)} $isActive={isActive} $index={index}>
-    <StageCardImage src={image} alt="stage image" fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+const StageCardImage= styled(Image)`
+object-fit:cover;
+width:100%;
+height:100%;
+@media(max-width:600px){
+  /* width:100%; */
+}
+@media(max-width:1200px){
+  /* width:50%; */
+}
+
+`
+const StageCard: React.FC<StageCardProps> = ({ image, video,  setCurrentStageVideo, isActive,index,Xtranslate }) => (
+  <StageCardContainer $Xtranslate={Xtranslate} className="stageCard" onClick={() =>  setCurrentStageVideo(video)} $isActive={isActive} $index={index}>
+    <StageCardImage src={image} alt="stage image" priority width={100}height={100}/>
   </StageCardContainer>
 );
 
