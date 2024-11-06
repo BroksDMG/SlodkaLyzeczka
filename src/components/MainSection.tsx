@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { useRef,useEffect,useState } from 'react';
 import Button from './Button';
-import { BiSolidLeftArrow,BiSolidRightArrow } from "react-icons/bi";
-import StageCard from './StageCard';
-import theme from '@/styles/theme';
+import StageSlider from './StageSlider';
 import React from 'react';
 const MainContainer = styled.section`
   position: relative;
@@ -24,8 +22,6 @@ const VideoSource = styled.video`
   z-index: -1;
   opacity: 0.5;
   transition: all 0.5s ease;
-
- 
 `;
 const LogoImg = styled(Image)`
   max-width: 300px;
@@ -60,21 +56,6 @@ const NormalCenterText=styled.p`
     text-align:center;
 `
 
-const StageContainer = styled.div<{$activeIndex:number}>`
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  height: 100vh;
-  .slider {
-    width: 50%;
-    height:35vh;
-    display: flex;
-    gap: ${props => props.theme.spacing.medium};
-    margin-bottom: ${props => props.theme.spacing.xlarge};
-  }
-`;
-
 const ButtonContainer=styled.div`
         display:flex;
         width:100%;
@@ -82,33 +63,7 @@ const ButtonContainer=styled.div`
 `
 const MainSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [currentStageVideo, SetCurrentStageVideo] = useState('/videos/main.mp4');
-  const [activeIndex, setActiveIndex] = useState(0); // Dodajemy activeIndex do stanu
-
-  const [stagesData,setStagesData] = useState([
-    { imagePath: '/images/Stage0.jpg', videoPath: '/videos/main.mp4' },
-    { imagePath: '/images/Stage1.jpg', videoPath: '/videos/Ciastko.mp4' },
-    { imagePath: '/images/Stage2.jpg', videoPath: '/videos/Babeczki.mp4' },
-  ]);
-
-  const handleSceneChange = (newVideo: string, index: number) => {
-    SetCurrentStageVideo(newVideo);
-    setActiveIndex(index);
-  };
-
-  const buttonHandler = (i: number) => {
-    const newIndex = (activeIndex + i + stagesData.length) % stagesData.length;
-    SetCurrentStageVideo(stagesData[newIndex].videoPath);
-    setActiveIndex(newIndex);
-    // setTimeout(() => {
-    //   if (i === 1) {
-    //     setStagesData([...stagesData.slice(1), stagesData[0]]);
-    //   } else if (i === -1) {
-    //     setStagesData([stagesData[stagesData.length - 1], ...stagesData.slice(0, -1)]);
-    //     setActiveIndex(0)
-    //   }
-    // }, 300);
-  };
+  const [currentStageVideo, setCurrentStageVideo] = useState('/videos/main.mp4');
 
   useEffect(() => {
     if (videoRef.current) {
@@ -119,7 +74,6 @@ const MainSection: React.FC = () => {
   return (
     <MainContainer>
       <Filter />
-
       <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} priority/>
       <TextContainer>
         <TextTitle>Zanurz się w słodką magię każdej łyżeczki!</TextTitle>
@@ -130,28 +84,9 @@ const MainSection: React.FC = () => {
         <NormalCenterText>Sprawdź naszą ofertę i zasmakuj słodkich przyjemności</NormalCenterText>
         <ButtonContainer>
           <Button radius='10px' >Sprawdź!</Button>
-
         </ButtonContainer>
       </TextContainer>
-      <StageContainer $activeIndex={activeIndex} >
-        <Button onClick={()=>buttonHandler(-1)} radius="50%" fontSize={theme.textSize.xlarge}>< BiSolidLeftArrow/></Button>
-        <Button onClick={()=>buttonHandler(1)} radius='50%' fontSize={theme.textSize.xlarge}><BiSolidRightArrow/></Button>
-        <div className='slider'>
-          {stagesData.map((stageData, index) => (
-            <StageCard
-              key={index}
-              image={stageData.imagePath}
-              video={stageData.videoPath}
-              setCurrentStageVideo={() => handleSceneChange(stageData.videoPath, index)}
-              isActive={index === activeIndex}
-              index={activeIndex}
-              Xtranslate={(index - activeIndex) * 10}
-            />
-          ))}
-        </div>
-      </StageContainer>
-
-      {/* <VideoSource ref={videoRef} src="/videos/main.mp4" autoPlay muted loop /> */}
+      <StageSlider setCurrentStageVideo={setCurrentStageVideo}/>
       <VideoSource  ref={videoRef} src={currentStageVideo} autoPlay muted loop />
     </MainContainer>
   );
