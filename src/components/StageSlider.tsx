@@ -14,20 +14,15 @@ const showStage = ()=>keyframes`
     transform:scale(1.3) translateY(-10%) ;
    }
    to{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-15%);
-    opacity:0.2}
+    opacity:0.1}
 `
 const showlastStage=()=>keyframes`
   to{
     width:10em;
 }
 `
-const moveStages=()=>keyframes`
-  to{
-    transform:translateX(0);
-  }
-`
 
-const StageCard = styled.div<{ setCurrentStageVideo:(video:string)=>void }>`
+const StageCard = styled.div`
   position: relative;
   overflow: hidden;
   width:10em;
@@ -36,7 +31,6 @@ const StageCard = styled.div<{ setCurrentStageVideo:(video:string)=>void }>`
   aspect-ratio:24/41;
   cursor: pointer;
   opacity:0.5;
-  transition: transform 0.4s ease; /* Płynna animacja */
 
 `;
 const StageCardImage= styled(Image)`
@@ -57,44 +51,41 @@ const StageContainer = styled.div`
   justify-content: end;
   align-items: end;
   height: 100vh;
-
   .slider {
     width: 50%;
     height:35vh;
     display: flex;
     gap: ${props => props.theme.spacing.medium};
     margin-bottom: ${props => props.theme.spacing.xlarge};
-    /* transform:translateX(10em); */
-
-    &.next {
-      /* transform:translateX(10em);
-      animation: ${moveStages} 0.3s linear 0.3s forwards; */
-
-      .stageCard:nth-child(1) {
-        animation: ${showStage} 0.4s linear ;
-        z-index: 100;
-      }
-
-      /* .stageCard:nth-last-child(1) {
+    .stageCard:nth-last-child(1) {
         width: 0;
-        animation: ${showlastStage} 0.3s linear 0.3s forwards;
-      } */
+        animation: ${showlastStage} 0.3s linear 0.5s forwards;
+      }
+    &.next {
+      /* Przesunięcie w lewo */
+      .stageCard:nth-child(1) {
+        animation: ${showStage} 0.3s linear forwards ;
+      }
+      .stageCard {
+        transform: translateX(-100%); /* Dodanie płynności */
+        transition: transform 0.4s ease-in-out
+    }
     }
   }
 `;
 const StageSlider: React.FC<StageCardProps> = ({  setCurrentStageVideo, }) => {
-  const [stagesData,setStagesData]=useState([
-    { imagePath: '/images/Stage0.jpg', videoPath: '/videos/main.mp4' },
+  const stagesData=[
     { imagePath: '/images/Stage1.jpg', videoPath: '/videos/Ciastko.mp4' },
     { imagePath: '/images/Stage2.jpg', videoPath: '/videos/Babeczki.mp4' },
-  ])
+    { imagePath: '/images/Stage0.jpg', videoPath: '/videos/main.mp4' },
+  ]
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(stagesData.length-1);
 
-  const handleSceneChange = (newVideo: string, index: number) => {
-    setCurrentStageVideo(newVideo);
-    setActiveIndex(index);
-  };
+  // const handleSceneChange = (newVideo: string, index: number) => {
+  //   setCurrentStageVideo(newVideo);
+  //   setActiveIndex(index);
+  // };
   console.log(activeIndex)
   const buttonHandler = (direction  : number) => {
     const newIndex = (activeIndex + direction + stagesData.length) % stagesData.length;
@@ -102,18 +93,16 @@ const StageSlider: React.FC<StageCardProps> = ({  setCurrentStageVideo, }) => {
       setCurrentStageVideo(stagesData[newIndex].videoPath);
       setActiveIndex(newIndex);
     },400)
-
+    console.log(activeIndex)
     const sliderDom= document.querySelector('.slider');
     const itemThumbNail= document.querySelectorAll('.stageCard');
 
     if(direction===1){
-
       sliderDom?.classList.add('next')
-
       setTimeout(() => {
         sliderDom?.appendChild(itemThumbNail[0]) ;
         sliderDom?.classList.remove('next');
-      }, 1700); // Czas trwania animacji + mała przerwa
+      }, 500);
     }
   };
   return(
@@ -125,8 +114,6 @@ const StageSlider: React.FC<StageCardProps> = ({  setCurrentStageVideo, }) => {
           <StageCard
             key={index}
             className="stageCard"
-            onClick={() =>  setCurrentStageVideo(stageData.videoPath)}
-            setCurrentStageVideo={() => handleSceneChange(stageData.videoPath, index)}
           >
             <StageCardImage src={stageData.imagePath} alt="stage image" priority width={100}height={100}/>
           </StageCard>
