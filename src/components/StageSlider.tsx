@@ -11,10 +11,17 @@ interface StageCardProps{
 
 const showStage = ()=>keyframes`
    from{
-    transform:scale(1.3) translateY(-10%) ;
+    transform:scale(1) translateY(-10%) ;
    }
    to{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-15%);
     opacity:0.1}
+`
+const hideStage = ()=>keyframes`
+    from{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-15%);
+      opacity:0.1}
+   to{
+    transform:scale(1) translateY(0) ;
+   }
 `
 const showlastStage=()=>keyframes`
   to{
@@ -24,17 +31,15 @@ const showlastStage=()=>keyframes`
 
 const StageCard = styled.div`
   position: relative;
-  overflow: hidden;
   width:10em;
   z-index:2;
-  border-radius: 8px;
   aspect-ratio:24/41;
-  cursor: pointer;
   opacity:0.5;
 
 `;
 const StageCardImage= styled(Image)`
 object-fit:cover;
+border-radius: 8px;
 width:100%;
 height:100%;
 @media(max-width:600px){
@@ -51,15 +56,16 @@ const StageContainer = styled.div`
   justify-content: end;
   align-items: end;
   height: 100vh;
+  gap: ${props => props.theme.spacing.medium};
+  padding-bottom: ${props => props.theme.spacing.xlarge};
   .slider {
+    gap: ${props => props.theme.spacing.medium};
     width: 50%;
     height:35vh;
     display: flex;
-    gap: ${props => props.theme.spacing.medium};
-    margin-bottom: ${props => props.theme.spacing.xlarge};
     .stageCard:nth-last-child(1) {
         width: 0;
-        animation: ${showlastStage} 0.3s linear 0.5s forwards;
+        animation: ${showlastStage} 0.3s linear 0.3s forwards;
       }
     &.next {
       /* Przesunięcie w lewo */
@@ -67,9 +73,14 @@ const StageContainer = styled.div`
         animation: ${showStage} 0.3s linear forwards ;
       }
       .stageCard {
-        transform: translateX(-100%); /* Dodanie płynności */
-        transition: transform 0.4s ease-in-out
+        transform: translateX(-100%); 
+        transition: transform 0.3s ease-in-out
     }
+    }
+    &.prev{
+      .stageCard:nth-child(1) {
+        animation: ${hideStage} 0.3s linear forwards ;
+      }
     }
   }
 `;
@@ -86,23 +97,26 @@ const StageSlider: React.FC<StageCardProps> = ({  setCurrentStageVideo, }) => {
   //   setCurrentStageVideo(newVideo);
   //   setActiveIndex(index);
   // };
-  console.log(activeIndex)
   const buttonHandler = (direction  : number) => {
     const newIndex = (activeIndex + direction + stagesData.length) % stagesData.length;
-    setTimeout(()=>{
-      setCurrentStageVideo(stagesData[newIndex].videoPath);
-      setActiveIndex(newIndex);
-    },400)
-    console.log(activeIndex)
     const sliderDom= document.querySelector('.slider');
     const itemThumbNail= document.querySelectorAll('.stageCard');
-
     if(direction===1){
       sliderDom?.classList.add('next')
       setTimeout(() => {
         sliderDom?.appendChild(itemThumbNail[0]) ;
         sliderDom?.classList.remove('next');
-      }, 500);
+        setCurrentStageVideo(stagesData[newIndex].videoPath);
+        setActiveIndex(newIndex);
+      }, 300); // Czas trwania animacji + mała przerwa
+    }else{
+      sliderDom?.classList.add('prev');
+      sliderDom?.prepend(itemThumbNail[itemThumbNail.length-1]);
+      setCurrentStageVideo(stagesData[newIndex].videoPath);
+      setActiveIndex(newIndex);
+      setTimeout(()=>{
+        sliderDom?.classList.remove('prev')
+      },300)
     }
   };
   return(
