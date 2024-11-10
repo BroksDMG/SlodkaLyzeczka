@@ -18,14 +18,20 @@ const showStage = ()=>keyframes`
 `
 const hideStage = ()=>keyframes`
     from{transform:scale(3) scaleX(3)  translateY(-25%) translateX(-15%);
-      opacity:0.1}
+      opacity:0}
    to{
-    transform:scale(1) translateY(0) ;
+    transform:scale(1) translateY(0);
+     opacity: 0.5   ;
    }
 `
 const showlastStage=()=>keyframes`
   to{
-    width:10em;
+    transform:scaleX(1)
+}
+`
+const hidelastStage=()=>keyframes`
+  to{
+    transform:scaleX(0)
 }
 `
 
@@ -63,10 +69,8 @@ const StageContainer = styled.div`
     width: 50%;
     height:35vh;
     display: flex;
-    .stageCard:nth-last-child(1) {
-        width: 0;
-        animation: ${showlastStage} 0.3s linear 0.3s forwards;
-      }
+    
+       
     &.next {
       /* Przesunięcie w lewo */
       .stageCard:nth-child(1) {
@@ -74,12 +78,31 @@ const StageContainer = styled.div`
       }
       .stageCard {
         transform: translateX(-100%); 
-        transition: transform 0.3s ease-in-out
+        transition: transform 0.3s ease-in-out;
     }
+    }
+    &.nextLast{
+      .stageCard:nth-last-child(1) {
+      transform:scaleX(0);
+      transform-origin:left;
+      animation: ${showlastStage} 0.3s ease-in-out forwards;
+      }
     }
     &.prev{
+      
+      .stageCard {
+        transform: translateX(100%); 
+        transition: transform 0.3s linear;
+      }
+      .stageCard:nth-last-child(1) {
+        transform-origin:right;
+        transform:scaleX(1);
+        animation: ${hidelastStage} 0.3s ease-in-out forwards;
+      }
+    }
+    &.prevFirst{
       .stageCard:nth-child(1) {
-        animation: ${hideStage} 0.3s linear forwards ;
+        animation: ${hideStage} 0.3s linear  ;
       }
     }
   }
@@ -108,15 +131,24 @@ const StageSlider: React.FC<StageCardProps> = ({  setCurrentStageVideo, }) => {
         sliderDom?.classList.remove('next');
         setCurrentStageVideo(stagesData[newIndex].videoPath);
         setActiveIndex(newIndex);
+        sliderDom?.classList.add("nextLast");
       }, 300); // Czas trwania animacji + mała przerwa
+      setTimeout(()=>{
+        sliderDom?.classList.remove('nextLast')
+      },600)
     }else{
       sliderDom?.classList.add('prev');
-      sliderDom?.prepend(itemThumbNail[itemThumbNail.length-1]);
-      setCurrentStageVideo(stagesData[newIndex].videoPath);
-      setActiveIndex(newIndex);
       setTimeout(()=>{
+        sliderDom?.prepend(itemThumbNail[itemThumbNail.length-1]);
+        setCurrentStageVideo(stagesData[newIndex].videoPath);
+        setActiveIndex(newIndex);
         sliderDom?.classList.remove('prev')
+        sliderDom?.classList.add('prevFirst');
+
       },300)
+      setTimeout(()=>{
+        sliderDom?.classList.remove('prevFirst')
+      },600)
     }
   };
   return(
