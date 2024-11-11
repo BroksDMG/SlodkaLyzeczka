@@ -19,12 +19,11 @@ const Home: NextPage = () => {
     if (footer) {
       const observer = new IntersectionObserver(
         ([entry]) => {
-          // Jeśli stopka jest widoczna, wyłącz sticky behavior
           setIsSticky(!entry.isIntersecting);
         },
         {
-          root: null, // Przewijanie względem całego viewportu
-          threshold: 0.1, // Wykrycie, kiedy stopka jest w 10% widoczna
+          root: null,
+          threshold: 0.1,
         }
       );
 

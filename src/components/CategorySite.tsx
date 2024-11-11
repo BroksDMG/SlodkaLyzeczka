@@ -6,7 +6,7 @@ import theme from "@/styles/theme";
 import React from "react";
 
 interface CatergorySiteInterface{
-    $categoryId:string;
+    categoryId:string;
     setCategoryId?:(id:string)=>void;
     productDetailData?:object;
 }
@@ -33,7 +33,7 @@ interface ProductDataInterface {
     SeetTables: Product;
 }
 
-const CategorySiteContainer=styled.section<CatergorySiteInterface>`
+const CategorySiteContainer=styled.section<{$categoryId:string}>`
     width:95%;
     height:100vh;
     position:fixed;
@@ -137,7 +137,7 @@ const CategorySiteHeaderSection=styled.div<{$bgColor:string}>`
     h1{
     position: absolute;
     width:100%;
-    background-color: rgba(255, 255, 255, 0.7);  /* Białe półprzezroczyste tło (70% przezroczystości) */
+    background-color: rgba(255, 255, 255, 0.7);  
     color: ${props=>props.$bgColor||props.theme.colors.goldIntense}; 
     font-size: 34px;  
     font-weight: bold; 
@@ -173,17 +173,16 @@ const ExitButton=styled.button<{$bgColor:string}>`
     left:0px;
     z-index:20;
     &:hover {
-      /* Zwiększona przezroczystość przy hoverze */
-    animation: ${grow} 0.9s forwards;           /* Powiększenie przy hover */                        
+    animation: ${grow} 0.9s forwards;                                
     opacity: 0.9;   
   }
 `
 
 const CategorySiteDescSection =styled.span<{$bgColor:string}>`
-   background-color: #f0f0f0;  /* Delikatne tło, aby wyróżnić tekst */
+   background-color: #f0f0f0; 
    width:100%;
-  padding: 40px 30px;  /*Duże wewnętrzne odstępy dla przestrzeni*/
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* Subtelny cień dla efektu unoszenia */
+  padding: 40px 30px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
   span{
     font-weight:bold;
     margin-bottom:10px;
