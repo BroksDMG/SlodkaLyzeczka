@@ -9,7 +9,6 @@ const QuestionSectionContainer=styled.section`
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-left:${(props)=>props.theme.spacing.xlarge};
     margin-right:${(props)=>props.theme.spacing.xlarge};
     gap:10%;
 `

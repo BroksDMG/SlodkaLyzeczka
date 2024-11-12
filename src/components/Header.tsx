@@ -4,16 +4,12 @@ import React from 'react';
 interface HeaderInterface{
   isSticky:boolean;
 }
-// interface StyledProps {
-//   $sticky?: boolean; // Declare the prop
-// }
 const HeaderContainer = styled.header<{ $sticky: boolean }>`
   background: ${(props) => props.theme.colors.background};
-  /* padding: ${(props) => props.theme.spacing.medium}; */
   color: ${(props) => props.theme.colors.textGold};
   display: flex;
   font-size:${(props)=>props.theme.textSize.large};
-  align-items: center; /* Dodano dla wyrównania elementów w pionie */
+  align-items: center; 
   top:0;
   position: sticky;
   z-index:10;
@@ -39,7 +35,8 @@ const NavList=styled.ul`
   display: flex;
   gap: ${(props) => props.theme.spacing.large};
   padding: 0 0 0 5px;
-  margin: 0;
+  white-space: nowrap;
+
 `
 const NavItem=styled.li`
  a {

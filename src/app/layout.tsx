@@ -10,6 +10,7 @@ import Head from 'next/head';
 const Body = styled.body`
   display: flex;
   min-height: 100vh;
+  width:100%;
   flex-direction: column;
   justify-content: flex-start;
   position:relative;

@@ -1,4 +1,4 @@
-import styled,{keyframes} from "styled-components";
+import styled from "styled-components";
 import Image from "next/image";
 import React from "react";
 
@@ -10,24 +10,11 @@ interface CategoryCardProps{
  color:string,
  setCategoryId:(id:string)=>void,
 }
-const an = keyframes`
-  from {
-transform: translateY(0%);
-}
-to {
-transform: translateY(-350%);
-}
-`;
 const CategoryCardContainer=styled.article`
     width:20em;
     height:50vh;
     position:relative ; 
     flex: 0 0 auto;
-
-  /* &:hover h1 {
-    animation: ${an} 0.5s ease-out forwards;
-  } */
-  
     &:hover .description {
     opacity: 1;
     transform: translateY(0);
