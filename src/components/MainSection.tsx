@@ -30,36 +30,53 @@ const LogoImg = styled(Image)`
   position:absolute;
 `;
 const Filter = styled.div`
-    background-color:${(props=>props.theme.colors.gold)};
-    position: absolute;
+  background-color:${(props=>props.theme.colors.gold)};
+  position: absolute;
   width: 100%;
   height: 100%;
   opacity:40%;
 `
 const TextContainer  =styled.div`
-    border-radius:15px;
-    padding: 10px;
-    width:70%;
-    height:50vh;
-    position:absolute;
-    margin-top:30vh;
-    margin-left:${props=>props.theme.spacing.xlarge};
-`
-const TextTitle=styled.h1`
-opacity:1;
-`
-const NormalText=styled.p`
+  border-radius:15px;
+  padding: 10px;
+  width:70%;
+  height:50vh;
+  position:absolute;
+  top:30vh;
+  left:${props=>props.theme.spacing.xlarge};
+  h1{
+    opacity:1;
+  }
+  p{
     font-size:${props=>props.theme.textSize.large};
-`
-const NormalCenterText=styled.p`
-    font-size:${props=>props.theme.textSize.medium};
-    text-align:center;
+  }
+  @media(max-width:760px){
+    top:25vh;
+    width:80%;
+    p{
+      font-size:${props=>props.theme.textSize.medium};
+    }
+    h1{
+      font-size:${props=>props.theme.textSize.large}
+    }
+  }
 `
 
 const ButtonContainer=styled.div`
-        display:flex;
-        width:100%;
-    justify-content:center;
+ p{
+    font-size:${props=>props.theme.textSize.medium};
+  }
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  justify-content:center;
+  @media (max-width:760px){
+    p{
+      font-size:${props=>props.theme.textSize.small};
+    }
+  }
+ 
 `
 const MainSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -76,13 +93,13 @@ const MainSection: React.FC = () => {
       <Filter />
       <LogoImg src='/images/logo.png' alt="logoHeader" width={150} height={150} priority/>
       <TextContainer>
-        <TextTitle>Zanurz się w słodką magię każdej łyżeczki!</TextTitle>
-        <NormalText>
+        <h1>Zanurz się w słodką magię każdej łyżeczki!</h1>
+        <p>
                 W Słodkiej Łyżeczce każde nasze wypieki są ręcznie robione, dodając odrobinę magii
                 do każdej okazji. Od wyjątkowych tortów ślubnych przez słodkie stoły po pyszszne babeczki - każdy kęs to czysta rozkosz
-        </NormalText>
-        <NormalCenterText>Sprawdź naszą ofertę i zasmakuj słodkich przyjemności</NormalCenterText>
+        </p>
         <ButtonContainer>
+          <p>Sprawdź naszą ofertę i zasmakuj słodkich przyjemności</p>
           <Button radius='10px' >Sprawdź!</Button>
         </ButtonContainer>
       </TextContainer>

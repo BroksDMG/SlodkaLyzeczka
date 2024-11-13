@@ -13,10 +13,17 @@ const QuestionSectionContainer=styled.section`
     gap:10%;
 `
 const QuestionSectionSideBar=styled.aside`
-   width:20em;
+   width:40%;
    height:50vh;
    position:relative;
-
+   h1{
+    font-size:${(props)=>props.theme.textSize.xlarge};
+   }
+   @media(max-width:760px){
+    p{
+      font-size:${props=>props.theme.textSize.medium}
+    }
+   }
 `
 const QuestionSectionContainerQuestionCard=styled.article`
 width:40%;
@@ -24,6 +31,7 @@ width:40%;
 const QusetionSecitionImageContainer=styled.div`
      width:100%;
     height:100%;
+    aspect-ratio:24/24;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -32,9 +40,8 @@ const QusetionSecitionImageContainer=styled.div`
 `
 const QuestionSectionImage=styled(Image)`
     object-fit:cover;
-`
-const QuestionSectionTitle=styled.h1`
-    font-size:${(props)=>props.theme.textSize.xxlarge};
+    width:100%;
+    height: 100%;
 `
 const QuestionsSection :React.FC=()=>{
   const questionData=[
@@ -55,11 +62,10 @@ const QuestionsSection :React.FC=()=>{
   return (
     <QuestionSectionContainer>
       <QuestionSectionSideBar>
-        <QuestionSectionTitle>Najczęstsze Pytania</QuestionSectionTitle>
+        <h1>Najczęstsze Pytania</h1>
         <p>Znajdź odpowiedzi na najczęściej zadawane pytani dotyczące naszych wypieków. Nie trać czasu i uzyskaj odpowiedz na nutrujące pytania</p>
         <QusetionSecitionImageContainer>
-
-          <QuestionSectionImage src='/images/MisQuestioSeciton.png' alt='mis qustion section' fill sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+          <QuestionSectionImage src='/images/MisQuestioSeciton.png' alt='mis qustion section' width={100}height={100}/>
         </QusetionSecitionImageContainer>
       </QuestionSectionSideBar>
       <QuestionSectionContainerQuestionCard>
