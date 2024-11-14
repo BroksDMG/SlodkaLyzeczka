@@ -16,10 +16,15 @@ const HeaderContainer = styled.header<{ $sticky: boolean }>`
   overflow-x:hidden;
   transition: transform 0.6s ease;
   transform: ${(props ) => (props.$sticky ? 'translateY(0)' : 'translateY(-100%)')};
+  @media(max-width:480px) {
+    font-size:${(props)=>props.theme.textSize.medium};
+  }
 `;
 
 const LogoImg = styled(Image)`
-  max-width: 300px;
+  @media(max-width:480px) {
+    width:120px;
+  }
   height: auto;
 `;
 const Nav=styled.nav`

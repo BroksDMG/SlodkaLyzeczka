@@ -28,6 +28,9 @@ const LogoImg = styled(Image)`
   margin-left:${props=>props.theme.spacing.medium};
   height: auto;
   position:absolute;
+  @media(max-width:480px) {
+    width:120px;
+  }
 `;
 const Filter = styled.div`
   background-color:${(props=>props.theme.colors.gold)};
@@ -55,6 +58,7 @@ const TextContainer  =styled.div`
     width:80%;
     p{
       font-size:${props=>props.theme.textSize.medium};
+      margin-top:10px;
     }
     h1{
       font-size:${props=>props.theme.textSize.large}
@@ -62,6 +66,8 @@ const TextContainer  =styled.div`
   }
   @media(max-width:480px) {
     top:20vh;
+    left:${props=>props.theme.spacing.small};
+    width:90%;
   }
 `
 
@@ -75,6 +81,7 @@ const ButtonContainer=styled.div`
   width:100%;
   justify-content:center;
   @media (max-width:760px){
+    margin-top:20px;
     p{
       font-size:${props=>props.theme.textSize.small};
     }

@@ -48,12 +48,6 @@ object-fit:cover;
 border-radius: 8px;
 width:100%;
 height:100%;
-@media(max-width:600px){
-  /* width:100%; */
-}
-@media(max-width:1200px){
-  /* width:50%; */
-}
 
 `
 const StageContainer = styled.div`
@@ -104,6 +98,9 @@ const StageContainer = styled.div`
       .stageCard:nth-child(1) {
         animation: ${hideStage} 0.3s linear  ;
       }
+    }
+    @media (max-width:760px) {
+      height:25vh;
     }
   }
 `;
