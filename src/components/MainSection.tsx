@@ -60,6 +60,9 @@ const TextContainer  =styled.div`
       font-size:${props=>props.theme.textSize.large}
     }
   }
+  @media(max-width:480px) {
+    top:20vh;
+  }
 `
 
 const ButtonContainer=styled.div`

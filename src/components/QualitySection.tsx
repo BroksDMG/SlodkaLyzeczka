@@ -3,8 +3,6 @@ import Image from "next/image";
 import React from "react";
 const QualitySectionContainer=styled.section`
   width:100%;
-  height:100vh;
-  min-height:max-content;
   position:relative;
   display:flex;
   flex-direction:column;

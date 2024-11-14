@@ -9,34 +9,58 @@ const QuestionSectionContainer=styled.section`
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-right:${(props)=>props.theme.spacing.xlarge};
+    min-height:max-content; 
     gap:10%;
+    @media(max-width:760px) {
+      flex-direction:column;
+     
+    }
 `
 const QuestionSectionSideBar=styled.aside`
    width:40%;
-   height:50vh;
-   position:relative;
    h1{
     font-size:${(props)=>props.theme.textSize.xlarge};
    }
    @media(max-width:760px){
+    width:100%;
+    padding:0px 20px 0 20px;
+    display:flex;
+    h1{
+      margin-top:20px;
+      font-size:${props=>props.theme.textSize.large};
+    }
     p{
       font-size:${props=>props.theme.textSize.medium}
+    }
+   }
+   @media(max-width:480px) {
+    h1{
+      margin-top:10px;
     }
    }
 `
 const QuestionSectionContainerQuestionCard=styled.article`
 width:40%;
+@media(max-width:760px){
+  width:100%;
+  padding:0px 20px 0 20px;
+}
 `
 const QusetionSecitionImageContainer=styled.div`
-     width:100%;
-    height:100%;
-    aspect-ratio:24/24;
+    position:relative;
+    width:100%;
+    aspect-ratio:3/4;
+    max-width:300px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    position:relative;
+    @media (max-width:760px) {
+      aspect-ratio:3/3;
+      max-width:250px;
+      min-width:150px;
+    }
+    
 `
 const QuestionSectionImage=styled(Image)`
     object-fit:cover;
@@ -62,8 +86,8 @@ const QuestionsSection :React.FC=()=>{
   return (
     <QuestionSectionContainer>
       <QuestionSectionSideBar>
-        <h1>Najczęstsze Pytania</h1>
-        <p>Znajdź odpowiedzi na najczęściej zadawane pytani dotyczące naszych wypieków. Nie trać czasu i uzyskaj odpowiedz na nutrujące pytania</p>
+        <div><h1>Najczęstsze Pytania</h1>
+          <p>Znajdź odpowiedzi na najczęściej zadawane pytani dotyczące naszych wypieków. Nie trać czasu i uzyskaj odpowiedz na nutrujące pytania</p></div>
         <QusetionSecitionImageContainer>
           <QuestionSectionImage src='/images/MisQuestioSeciton.png' alt='mis qustion section' width={100}height={100}/>
         </QusetionSecitionImageContainer>

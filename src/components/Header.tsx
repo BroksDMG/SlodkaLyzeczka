@@ -13,6 +13,7 @@ const HeaderContainer = styled.header<{ $sticky: boolean }>`
   top:0;
   position: sticky;
   z-index:10;
+  overflow-x:hidden;
   transition: transform 0.6s ease;
   transform: ${(props ) => (props.$sticky ? 'translateY(0)' : 'translateY(-100%)')};
 `;

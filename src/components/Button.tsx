@@ -35,6 +35,14 @@ transition: background 0.3s ease, transform 0.2s ease;
     background: ${(props) => props.theme.colors.gold};
     transform: translateY(4px); 
   }
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.fontSize ? `calc(${props.fontSize} * 0.8)` : '14px'};
+  }
+
+  @media (max-width: 480px) {
+    font-size: ${(props) => props.fontSize ? `calc(${props.fontSize} * 0.6)` : '12px'};
+  }
 `
 const Button :React.FC<ButtonProps>=({onClick,children, radius,fontSize})=>(
   <ButtonContainer onClick={onClick} radius={radius} fontSize={fontSize}>
