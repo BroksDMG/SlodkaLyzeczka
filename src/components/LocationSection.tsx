@@ -11,6 +11,10 @@ const LocationSectionContainer=styled.section`
     justify-content:center;
     overflow-x: auto; /* Allow horizontal scrolling */
     gap:5%;
+    @media(max-width:760px) {
+      flex-direction:column-reverse;
+      
+    }
 `
 const LocationTextContainer=styled.div`
     width:30%;
@@ -19,6 +23,10 @@ const LocationTextContainer=styled.div`
     display:flex;
     flex-direction:column;
     justify-content:center;
+    @media(max-width:760px) {
+      width:100%;
+
+    }
 `
 const LocationMapContainer=styled.div`
     width:60%;
@@ -40,14 +48,11 @@ const LocationSection:React.FC=()=>{
         <h1>Nasza Lokacja!</h1>
         <p>Zapraszamy do Słodkiej Łyżeczki,  nasza cukiernia znajduje się w Krajnie, łatwo dostępna dla każdego, kto pragnie poczuć magię ręcznie robionych wypieków.</p>
         <h4>Adres:</h4>
-        <p>Krjano Pierwsze</p>
-        <p>26-008 Górno</p>
+        <p>Krjano Pierwsze <br/>26-008 Górno</p>
         <h4>Godziny Otwarcia</h4>
-        <p>Poniedziałek - Czwartek: 8:00 - 16:00</p>
-        <p>Piątek - Niedziela: Zamknięte (Realizacja zamówień)</p>
+        <p>Poniedziałek - Czwartek: 8:00 - 16:00<br/>Piątek - Niedziela: Zamknięte (Realizacja zamówień)</p>
         <h4>Skontaktuj się z nami</h4>
-        <p>Telefon: xxx-xxx-xxx</p>
-        <p>Email: słodkałyżeczka@mail.pl</p>
+        <p>Telefon: xxx-xxx-xxx<br/>Email: słodkałyżeczka@mail.pl</p>
       </LocationTextContainer>
       <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image' fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/></LocationMapContainer>
     </LocationSectionContainer>
