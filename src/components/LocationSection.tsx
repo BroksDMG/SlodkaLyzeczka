@@ -14,6 +14,7 @@ const LocationSectionContainer=styled.section`
     @media(max-width:760px) {
       flex-direction:column-reverse;
       
+      padding:0 20px 0 20px
     }
 `
 const LocationTextContainer=styled.div`
@@ -25,7 +26,8 @@ const LocationTextContainer=styled.div`
     justify-content:center;
     @media(max-width:760px) {
       width:100%;
-
+      height:80%;
+      flex-direction:row
     }
 `
 const LocationMapContainer=styled.div`
@@ -36,6 +38,9 @@ const LocationMapContainer=styled.div`
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    @media (max-width:760px) {
+      width:100%;
+    }
 `
 const LocationMapImage=styled(Image)`
     width:100;
@@ -45,14 +50,18 @@ const LocationSection:React.FC=()=>{
   return(
     <LocationSectionContainer>
       <LocationTextContainer>
-        <h1>Nasza Lokacja!</h1>
-        <p>Zapraszamy do Słodkiej Łyżeczki,  nasza cukiernia znajduje się w Krajnie, łatwo dostępna dla każdego, kto pragnie poczuć magię ręcznie robionych wypieków.</p>
-        <h4>Adres:</h4>
-        <p>Krjano Pierwsze <br/>26-008 Górno</p>
-        <h4>Godziny Otwarcia</h4>
-        <p>Poniedziałek - Czwartek: 8:00 - 16:00<br/>Piątek - Niedziela: Zamknięte (Realizacja zamówień)</p>
-        <h4>Skontaktuj się z nami</h4>
-        <p>Telefon: xxx-xxx-xxx<br/>Email: słodkałyżeczka@mail.pl</p>
+        <div><h1>Nasza Lokacja!</h1>
+          <p>Zapraszamy do Słodkiej Łyżeczki,  nasza cukiernia znajduje się w Krajnie, łatwo dostępna dla każdego, kto pragnie poczuć magię ręcznie robionych wypieków.</p>
+        </div>
+        <div><h4>Adres:</h4>
+          <p>Krjano Pierwsze <br/>26-008 Górno</p>
+        </div>
+        <div><h4>Godziny Otwarcia</h4>
+          <p>Poniedziałek - Czwartek: 8:00 - 16:00<br/>Piątek - Niedziela: Zamknięte (Realizacja zamówień)</p>
+        </div>
+        <div><h4>Skontaktuj się z nami</h4>
+          <p>Telefon: xxx-xxx-xxx<br/>Email: słodkałyżeczka@mail.pl</p>
+        </div>
       </LocationTextContainer>
       <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image' fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/></LocationMapContainer>
     </LocationSectionContainer>
