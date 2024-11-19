@@ -43,8 +43,9 @@ const LocationMapContainer=styled.div`
     }
 `
 const LocationMapImage=styled(Image)`
-    width:100;
     object-fit:cover;
+    width:100%;
+    height:100%;
 `
 const LocationSection:React.FC=()=>{
   return(
@@ -63,7 +64,7 @@ const LocationSection:React.FC=()=>{
           <p>Telefon: xxx-xxx-xxx<br/>Email: słodkałyżeczka@mail.pl</p>
         </div>
       </LocationTextContainer>
-      <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image' fill priority sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"/></LocationMapContainer>
+      <LocationMapContainer><LocationMapImage src='/images/LocationSectionMapImage.png' alt='location section map image'width={100} height={100} priority/></LocationMapContainer>
     </LocationSectionContainer>
   )
 }

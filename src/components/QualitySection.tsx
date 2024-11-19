@@ -67,6 +67,8 @@ const CategoryCardImageContainer=styled.div`
 `
 const CatergoryCardImage=styled(Image)`
   object-fit:cover;
+  width:100%;
+  height:100%;
 `
 const QualitySection :React.FC=()=>{
   return(
@@ -81,7 +83,7 @@ const QualitySection :React.FC=()=>{
       <QualityCardContainer>
         <QualityCard>
           <CategoryCardImageContainer>
-            <CatergoryCardImage src='/images/QualityImageAnimals.png'alt="cardimage" fill/>
+            <CatergoryCardImage src='/images/QualityImageAnimals.png'alt="cardimage" width={100} height={100}/>
           </CategoryCardImageContainer>
           <h1>Ręczne wykonanie specjałów</h1>
           <p>Każdy wypiek jest starannie przygotowywany ręcznie, co gwarantuje najwyższą jakość i unikalny charakter naszych produktów</p>
@@ -89,7 +91,7 @@ const QualitySection :React.FC=()=>{
 
         <QualityCard>
           <CategoryCardImageContainer>
-            <CatergoryCardImage src='/images/QualityImageSingleCake.png'alt="cardimage" fill/>
+            <CatergoryCardImage src='/images/QualityImageSingleCake.png'alt="cardimage" width={100} height={100}/>
           </CategoryCardImageContainer>
           <h1>Kunszt cukierniczy</h1>
 
@@ -98,7 +100,7 @@ const QualitySection :React.FC=()=>{
 
         <QualityCard>
           <CategoryCardImageContainer>
-            <CatergoryCardImage src='/images/QualityImageCakes.png'alt="cardimage" fill/>
+            <CatergoryCardImage src='/images/QualityImageCakes.png'alt="cardimage" width={100} height={100}/>
           </CategoryCardImageContainer>
           <h1>Indywidualne zamówienia</h1>
 
