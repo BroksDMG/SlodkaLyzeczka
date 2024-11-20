@@ -4,9 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/GlobalStyles';
 import theme from '../styles/theme';
 import Footer from '../components/Footer';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import React from 'react';
 import Head from 'next/head';
+import { useState,useEffect } from 'react';
 const Body = styled.body`
   display: flex;
   min-height: 100vh;
@@ -15,7 +16,41 @@ const Body = styled.body`
   justify-content: flex-start;
   position:relative;
 `
+const GlobalLoader=styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* Dopasuj do swojego tła */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`
+
+const spin=()=>keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
+const Spinner =styled.div`
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: ${spin} 1s linear infinite;
+`
+
 const RootLayout = ({ children }: { children: ReactNode }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleComplete = () => setLoading(false);
+
+    handleComplete(); // Ustaw na false po pierwszym renderze
+    return () => {}; // Opcjonalne czyszczenie
+  }, []);
   return (
     <html lang="en">
       <Head>
@@ -24,11 +59,17 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Body>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        {loading?
+          <GlobalLoader>
+            <Spinner/>
+          </GlobalLoader>:
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+
+            {children}
+            <Footer />
+          </ThemeProvider>
+        }
       </Body>
     </html>
   );
